@@ -1,0 +1,40 @@
+/* Referrals tab. The admin panel's own colours and fonts. */
+.rf-top{ margin:-4px 0 18px; }
+.rf-top[hidden]{ display:none; }
+.rf-top > small{ display:block; margin-bottom:8px; font-size:12.5px; color:var(--muted); }
+.rf-top-list{ display:flex; gap:10px; overflow-x:auto; padding-bottom:2px; }
+.rf-chip, .rf-by{ display:flex; align-items:center; gap:10px; min-width:0; border:0; background:none; color:inherit; font:inherit; text-align:left; cursor:pointer; }
+.rf-chip{ flex:none; padding:10px 14px 10px 10px; border-radius:12px; background:var(--surface); }
+.rf-chip:hover{ background:var(--surface-3); }
+.rf-chip span, .rf-by span{ display:block; min-width:0; }
+.rf-chip b, .rf-by b{ display:block; font-size:13.5px; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rf-chip em, .rf-by em{ display:block; margin-top:2px; font-style:normal; font-size:12px; color:var(--muted); }
+.rf-by{ padding:0; }
+.rf-by .mb-av{ width:30px; height:30px; font-size:13px; }
+.rf-by:hover b{ text-decoration:underline; }
+.rf-link{ padding:0; border:0; background:none; color:var(--text); font:inherit; font-size:13.5px; text-align:left; cursor:pointer; }
+.rf-link:hover{ color:var(--ink); text-decoration:underline; }
+.rf-link b{ color:var(--ink); }
+.rf-ok, .rf-link b.rf-ok{ color:var(--ok); }
+.rf-mail{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rf-kind{ display:inline-block; padding:3px 9px; border-radius:99px; background:var(--surface-3); font-style:normal; font-size:12px; font-weight:600; color:var(--text); white-space:nowrap; }
+.rf-kind-free{ background:var(--warn-soft); color:var(--warn); }
+.rf-kind-none{ color:var(--muted); }
+.rf-who{ display:grid; grid-template-columns:minmax(0,1.6fr) auto minmax(0,1fr); gap:20px; align-items:center; margin-bottom:18px; padding:18px 20px; border-radius:12px; background:var(--surface); }
+.rf-who[hidden]{ display:none; }
+.rf-who-main{ display:flex; align-items:center; gap:14px; min-width:0; }
+.rf-who-main .mb-av{ width:44px; height:44px; font-size:17px; }
+.rf-who-main .mb-name small, .rf-who-up small, .rf-who-nums small{ display:block; font-size:12px; color:var(--muted); }
+.rf-who-main .mb-name b{ margin-top:2px; font-size:17px; }
+.rf-who-main .mb-name span{ white-space:normal; }
+.rf-who-nums{ display:flex; gap:24px; }
+.rf-who-nums b{ display:block; margin-top:4px; font-size:24px; line-height:1.1; color:var(--ink); font-variant-numeric:tabular-nums; }
+.rf-who-up{ display:flex; flex-direction:column; align-items:flex-start; gap:6px; min-width:0; }
+.rf-who-up .btn{ margin-top:6px; }
+.rf-list .mb-head, .rf-list .mb-row{ grid-template-columns:minmax(190px,1.4fr) minmax(110px,.7fr) minmax(170px,1.1fr) minmax(150px,.9fr) minmax(130px,.8fr); }
+#rf-more[hidden]{ display:none !important; }
+@media (max-width:900px){
+  .rf-who{ grid-template-columns:1fr; gap:14px; }
+  .rf-list .mb-row{ grid-template-columns:1fr 1fr; }
+  .rf-list .mb-who{ grid-column:1/-1; }
+}

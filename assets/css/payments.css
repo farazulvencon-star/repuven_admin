@@ -1,0 +1,48 @@
+/* Admin: reject reasons, review timer, bKash taka payouts, payment settings. Device font only. */
+:root{ --srv-plain:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
+.adx, .adx *, .rjx, .rjx *{ font-family:var(--srv-plain) !important; }
+.adx-chip{ display:inline-flex; align-items:center; gap:6px; margin-top:8px; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:650; background:var(--surface-3); color:var(--text); }
+.adx-chip svg{ width:12px; height:12px; }
+.adx-chip.is-late{ background:rgba(224,80,122,.14); color:#F28BA6; }
+.adx-chip.is-soon{ background:var(--warn-soft); color:var(--warn); }
+.adx-gone{ display:inline-flex; align-items:center; gap:7px; margin-top:10px; padding:7px 11px; border-radius:10px; background:var(--surface-2); color:var(--muted); font-size:12.5px; }
+.adx-gone svg{ width:13px; height:13px; }
+.adx-pay{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:10px; padding:12px 14px; border-radius:14px;
+  background:radial-gradient(120% 170% at 0% 0%, rgba(76,195,138,.14), rgba(76,195,138,0) 60%), var(--surface-2); }
+.adx-pay small{ display:block; font-size:10.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+.adx-pay b{ display:block; margin-top:3px; font-size:22px; font-weight:800; letter-spacing:-.02em; color:var(--ok); font-variant-numeric:tabular-nums; }
+.adx-pay span{ font-size:12.5px; color:var(--text); }
+.adx-settings{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; margin-bottom:16px; }
+.adx-card{ padding:16px 18px; border-radius:18px; background:var(--surface); box-shadow:inset 0 0 0 1px rgba(244,243,238,.07); }
+.adx-card h4{ margin:0; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+.adx-rate{ display:flex; align-items:baseline; gap:8px; margin-top:8px; }
+.adx-rate b{ font-size:28px; font-weight:800; letter-spacing:-.03em; color:var(--ink); font-variant-numeric:tabular-nums; }
+.adx-rate span{ font-size:13px; color:var(--muted); }
+.adx-card p{ margin:6px 0 0; font-size:12.5px; line-height:1.5; color:var(--muted); }
+.adx-form{ display:flex; gap:8px; margin-top:12px; }
+.adx-form .input{ flex:1; min-width:0; height:42px; border-radius:12px; }
+.adx-form .btn{ height:42px; border-radius:12px; padding:0 16px; }
+.adx-toggle{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:10px; }
+.adx-toggle b{ font-size:15px; color:var(--ink); }
+.adx-state{ display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700; }
+.adx-state.on{ background:var(--ok-soft); color:var(--ok); } .adx-state.off{ background:var(--surface-3); color:var(--muted); }
+/* reject sheet */
+.rjx{ position:fixed; inset:0; z-index:10050; display:flex; align-items:flex-end; justify-content:center; }
+.rjx[hidden]{ display:none; }
+.rjx-scrim{ position:absolute; inset:0; background:rgba(5,6,5,.74); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+.rjx-card{ position:relative; width:100%; max-width:500px; max-height:92vh; overflow-y:auto; padding:24px 22px 22px; border-radius:24px 24px 0 0; background:var(--surface);
+  box-shadow:0 -12px 60px -20px rgba(0,0,0,.85), inset 0 0 0 1px rgba(244,243,238,.07); animation:rjxUp .38s cubic-bezier(.2,.8,.2,1) both; }
+@media (min-width:640px){ .rjx{ align-items:center; padding:20px; } .rjx-card{ border-radius:24px; } }
+.rjx-mark{ display:grid; place-items:center; width:52px; height:52px; margin-bottom:14px; border-radius:17px; background:rgba(224,80,122,.14); color:#F28BA6; }
+.rjx-mark svg{ width:22px; height:22px; }
+.rjx h3{ margin:0; font-size:21px; font-weight:750; letter-spacing:-.02em; color:var(--ink); }
+.rjx-lead{ margin:6px 0 0; font-size:13.5px; line-height:1.5; color:var(--muted); }
+.rjx-quick{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 12px; }
+.rjx-quick button{ padding:8px 12px; border:0; border-radius:999px; background:var(--surface-2); color:var(--text); font-size:12.5px; font-weight:600; cursor:pointer; }
+.rjx-quick button:hover, .rjx-quick button.on{ background:var(--surface-3); color:var(--ink); box-shadow:inset 0 0 0 1px rgba(244,243,238,.18); }
+.rjx textarea.input{ min-height:110px; border-radius:14px; resize:vertical; }
+.rjx-hint{ display:flex; justify-content:space-between; margin-top:6px; font-size:12px; color:var(--muted); }
+.rjx-err{ margin-top:8px; font-size:13px; font-weight:600; color:#F28BA6; }
+.rjx-actions{ display:grid; grid-template-columns:1fr 1.4fr; gap:10px; margin-top:16px; }
+.rjx-actions .btn{ height:48px; border-radius:14px; }
+@keyframes rjxUp{ from{ opacity:.4; transform:translateY(40px); } to{ opacity:1; transform:none; } }

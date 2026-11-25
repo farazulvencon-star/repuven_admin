@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-accent="green">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Repuven Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0B0C0B">
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<script>window.SRV_EMBED = (function(){ try{ return window.self !== window.top; }catch(e){ return true; } })(); if(window.SRV_EMBED) document.documentElement.classList.add("embed");</script>
+<script>document.documentElement.classList.add("js")</script>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+
+<!-- Styles: base first, then layout, then each part of the app -->
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/landing.css">
+<link rel="stylesheet" href="assets/css/auth.css">
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/landing-sections.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="assets/css/admin.css">
+<link rel="stylesheet" href="assets/css/brand.css">
+<link rel="stylesheet" href="assets/css/vip-links.css">
+<link rel="stylesheet" href="assets/css/investors.css">
+<link rel="stylesheet" href="assets/css/announcements.css">
+<link rel="stylesheet" href="assets/css/chat.css">
+<link rel="stylesheet" href="assets/css/leadership.css">
+<link rel="stylesheet" href="assets/css/payments.css">
+<link rel="stylesheet" href="assets/css/deposits.css">
+<link rel="stylesheet" href="assets/css/team.css">
+<link rel="stylesheet" href="assets/css/members.css">
+<link rel="stylesheet" href="assets/css/referrals.css">
+<link rel="stylesheet" href="assets/css/transactions.css">
+<link rel="stylesheet" href="assets/css/tables.css">
+<link rel="stylesheet" href="assets/css/captcha.css">
+<link rel="stylesheet" href="assets/css/investor-shares.css">
+<link rel="stylesheet" href="assets/css/embed.css">
+<link rel="stylesheet" href="assets/css/bulk-add.css">
+<link rel="stylesheet" href="assets/css/notifications.css">
+<link rel="stylesheet" href="assets/css/sectors.css">
+
+<!-- Scripts that the page needs before it draws -->
+<script src="assets/js/chatkit.js" id="srv-chatkit"></script>
+<script src="assets/js/captcha.js"></script>
+<link rel="stylesheet" href="assets/css/alerts.css">
+<!-- while a saved login is being checked, show a plain loading screen instead of the login page -->
+<script>(function(){try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(/^sb-.+-auth-token$/.test(k)&&localStorage.getItem(k)){document.documentElement.classList.add("rv-booting");setTimeout(function(){document.documentElement.classList.remove("rv-booting");},10000);break;}}}catch(e){}})();</script>
+<style>
+#rv-boot{display:none}
+html.rv-booting body>*:not(#rv-boot){visibility:hidden!important}
+html.rv-booting #rv-boot{display:grid;position:fixed;inset:0;z-index:2147483000;place-items:center;background:#0C0D0C}
+#rv-boot img{width:64px;height:64px;border-radius:16px;display:block;margin:0 auto 18px}
+#rv-boot i{display:block;width:26px;height:26px;margin:0 auto;border-radius:50%;border:2.5px solid rgba(244,243,238,.18);border-top-color:#1DB34A;animation:rvspin .8s linear infinite}
+@keyframes rvspin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div id="rv-boot" aria-hidden="true"><div><img src="assets/img/logo.svg" alt=""><i></i></div></div>
+<svg id="srv-leader-sprite" xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="ldr-m1" x1="0.15" y1="0" x2="0.85" y2="1"><stop offset="0" stop-color="#F6CDA6"/><stop offset=".5" stop-color="#C27C47"/><stop offset="1" stop-color="#6B3A1C"/></linearGradient>
+    <linearGradient id="ldr-m2" x1="0.15" y1="0" x2="0.85" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".5" stop-color="#C3C8C4"/><stop offset="1" stop-color="#666D68"/></linearGradient>
+    <linearGradient id="ldr-m3" x1="0.15" y1="0" x2="0.85" y2="1"><stop offset="0" stop-color="#FFF1B8"/><stop offset=".5" stop-color="#E1AE3A"/><stop offset="1" stop-color="#875C0A"/></linearGradient>
+    <linearGradient id="ldr-m4" x1="0.15" y1="0" x2="0.85" y2="1"><stop offset="0" stop-color="#F5FCFF"/><stop offset=".5" stop-color="#A7C6D2"/><stop offset="1" stop-color="#4E6D78"/></linearGradient>
+    <linearGradient id="ldr-m5" x1="0.15" y1="0" x2="0.85" y2="1"><stop offset="0" stop-color="#ECF9FF"/><stop offset=".5" stop-color="#77C4F2"/><stop offset="1" stop-color="#255F92"/></linearGradient>
+    <linearGradient id="ldr-in" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#262B28"/><stop offset="1" stop-color="#0D0F0E"/></linearGradient>
+    <linearGradient id="ldr-sheen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".42" stop-color="#fff" stop-opacity="0"/></linearGradient>
+
+    <symbol id="ldr-b1" viewBox="0 0 48 48">
+      <path d="M24 3 41 9.2v14.2c0 9.7-6.9 17.3-17 21.6C13.9 40.7 7 33.1 7 23.4V9.2Z" fill="url(#ldr-m1)"/>
+      <path d="M24 3 41 9.2v14.2c0 9.7-6.9 17.3-17 21.6C13.9 40.7 7 33.1 7 23.4V9.2Z" fill="url(#ldr-sheen)"/>
+      <path d="M24 7.4 37 12.1v11.3c0 7.5-5.2 13.4-13 17-7.8-3.6-13-9.5-13-17V12.1Z" fill="url(#ldr-in)" stroke="#fff" stroke-opacity=".08"/>
+      <path d="M16.6 28.2 24 22.6l7.4 5.6" fill="none" stroke="url(#ldr-m1)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="ldr-b2" viewBox="0 0 48 48">
+      <path d="M24 3 41 9.2v14.2c0 9.7-6.9 17.3-17 21.6C13.9 40.7 7 33.1 7 23.4V9.2Z" fill="url(#ldr-m2)"/>
+      <path d="M24 3 41 9.2v14.2c0 9.7-6.9 17.3-17 21.6C13.9 40.7 7 33.1 7 23.4V9.2Z" fill="url(#ldr-sheen)"/>
+      <path d="M24 7.4 37 12.1v11.3c0 7.5-5.2 13.4-13 17-7.8-3.6-13-9.5-13-17V12.1Z" fill="url(#ldr-in)" stroke="#fff" stroke-opacity=".08"/>
+      <path d="M16.6 23.6 24 18l7.4 5.6M16.6 31.2 24 25.6l7.4 5.6" fill="none" stroke="url(#ldr-m2)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="ldr-b3" viewBox="0 0 48 48">
+      <path d="M24 3 41 9.2v14.2c0 9.7-6.9 17.3-17 21.6C13.9 40.7 7 33.1 7 23.4V9.2Z" fill="url(#ldr-m3)"/>
+      <path d="M24 3 41 9.2v14.2c0 9.7-6.9 17.3-17 21.6C13.9 40.7 7 33.1 7 23.4V9.2Z" fill="url(#ldr-sheen)"/>
+      <path d="M24 7.4 37 12.1v11.3c0 7.5-5.2 13.4-13 17-7.8-3.6-13-9.5-13-17V12.1Z" fill="url(#ldr-in)" stroke="#fff" stroke-opacity=".08"/>
+      <path d="m24 15.6 2.55 5.6 6.1.6-4.6 4.1 1.35 6-5.4-3.1-5.4 3.1 1.35-6-4.6-4.1 6.1-.6Z" fill="url(#ldr-m3)" stroke="url(#ldr-m3)" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="ldr-b4" viewBox="0 0 48 48">
+      <path d="M24 2.8 42.2 13.3v21.4L24 45.2 5.8 34.7V13.3Z" fill="url(#ldr-m4)"/>
+      <path d="M24 2.8 42.2 13.3v21.4L24 45.2 5.8 34.7V13.3Z" fill="url(#ldr-sheen)"/>
+      <path d="M24 7.4 38.2 15.6v16.8L24 40.6 9.8 32.4V15.6Z" fill="url(#ldr-in)" stroke="#fff" stroke-opacity=".08"/>
+      <path d="M24.00 13.80 25.79 18.73 31.04 18.91 26.90 22.14 28.35 27.19 24.00 24.25 19.65 27.19 21.10 22.14 16.96 18.91 22.21 18.73Z M15.60 26.00 16.48 28.39 19.02 28.49 17.03 30.06 17.72 32.51 15.60 31.10 13.48 32.51 14.17 30.06 12.18 28.49 14.72 28.39Z M32.40 26.00 33.28 28.39 35.82 28.49 33.83 30.06 34.52 32.51 32.40 31.10 30.28 32.51 30.97 30.06 28.98 28.49 31.52 28.39Z" fill="url(#ldr-m4)" stroke="url(#ldr-m4)" stroke-width=".9" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="ldr-b5" viewBox="0 0 48 48">
+      <path d="M13.6 15.2 15.2 5.4l5.2 4.6L24 3.4l3.6 6.6 5.2-4.6 1.6 9.8Z" fill="url(#ldr-m5)" stroke="url(#ldr-m5)" stroke-width="1" stroke-linejoin="round"/>
+      <circle cx="24" cy="29.4" r="16.2" fill="url(#ldr-m5)"/>
+      <circle cx="24" cy="29.4" r="16.2" fill="url(#ldr-sheen)"/>
+      <circle cx="24" cy="29.4" r="12.4" fill="url(#ldr-in)" stroke="#fff" stroke-opacity=".08"/>
+      <path d="M16.9 27.2 20.6 22.6h6.8l3.7 4.6L24 37.2Z" fill="url(#ldr-m5)"/>
+      <path d="M16.9 27.2h14.2M20.6 22.6 24 27.2l3.4-4.6M24 27.2v10" fill="none" stroke="#0D0F0E" stroke-opacity=".38" stroke-width=".9" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+<svg style="display:none" aria-hidden="true">
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+<symbol id="i-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="8 12.5 11 15.5 16 9"/></symbol>
+<symbol id="i-double-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 12 7 17 14 6"/><polyline points="9 17 20 5"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+<symbol id="i-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></symbol>
+<symbol id="i-arrows-lr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 2 21 6 17 10"/><line x1="3" y1="6" x2="21" y2="6"/><polyline points="7 22 3 18 7 14"/><line x1="21" y1="18" x2="3" y2="18"/></symbol>
+<symbol id="i-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></symbol>
+<symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></symbol>
+<symbol id="i-chevron-left-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><polyline points="13.5 8 9.5 12 13.5 16"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M8 5v14l11-7z"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 6.6 7.1.7-5.4 4.8 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.8l7.1-.7z"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2c.6 3.8 2.2 5.4 6 6-3.8.6-5.4 2.2-6 6-.6-3.8-2.2-5.4-6-6 3.8-.6 5.4-2.2 6-6z"/><path d="M19 15c.3 1.6.9 2.2 2.5 2.5-1.6.3-2.2.9-2.5 2.5-.3-1.6-.9-2.2-2.5-2.5 1.6-.3 2.2-.9 2.5-2.5z"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M4.5 12H2M22 12h-2.5M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h13a1 1 0 0 1 1 1v3"/><path d="M3 7v10a2 2 0 0 0 2 2h14a1 1 0 0 0 1-1v-3.5"/><path d="M15 13a1.5 1.5 0 1 0 0-3h4a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1z"/></symbol>
+<symbol id="i-user-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 19a5 5 0 0 0-10 0"/><circle cx="8" cy="8" r="4"/><line x1="18" y1="6" x2="18" y2="12"/><line x1="15" y1="9" x2="21" y2="9"/></symbol>
+<symbol id="i-message" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z"/></symbol>
+<symbol id="i-coin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 15.2c.5.6 1.4 1 2.5 1 1.8 0 3-.8 3-2s-1.2-1.7-3-2-3-.8-3-2 1.2-2 3-2c1.1 0 2 .4 2.5 1"/><line x1="12" y1="6.3" x2="12" y2="7.7"/><line x1="12" y1="16.3" x2="12" y2="17.7"/></symbol>
+<symbol id="i-coins" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="9" cy="7" rx="6" ry="3.2"/><path d="M3 7v4c0 1.8 2.7 3.2 6 3.2s6-1.4 6-3.2V7"/><path d="M3 11v4c0 1.8 2.7 3.2 6 3.2s6-1.4 6-3.2v-4"/><path d="M15 9.5c3.3.1 6 1.5 6 3.2v4c0 1.8-2.7 3.2-6 3.2-1.6 0-3-.3-4.2-.9"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><polyline points="7 11 12 16 17 11"/><path d="M4 18v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></symbol>
+<symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18"/><path d="M12 8v13"/><path d="M12 8C10 4 6 4 6 7c0 1.6 2 1.6 6 1zM12 8c2-4 6-4 6-1 0 1.6-2 1.6-6 1z"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18"/></symbol>
+<symbol id="i-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 2.6 18a1.8 1.8 0 0 0 1.6 2.7h15.6a1.8 1.8 0 0 0 1.6-2.7L13.7 3.9a1.8 1.8 0 0 0-3.4 0z"/><line x1="12" y1="9.5" x2="12" y2="13.5"/><circle cx="12" cy="16.7" r="1"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 5H4v2a3 3 0 0 0 3 3M17 5h3v2a3 3 0 0 1-3 3"/><path d="M12 14v3M9 20.5h6M8.5 20.5l.7-3.5h5.6l.7 3.5"/></symbol>
+<symbol id="i-medal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 2h7l-3 7h-1z"/><circle cx="12" cy="15" r="6.3"/><path d="M12 12.3v5.4M10.1 14l1.9-1.7 1.9 1.7"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 6.5 8 6 8-6"/></symbol>
+<symbol id="i-mail-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 4l9 6.5V19a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="m3 10.5 7.2 5a2.8 2.8 0 0 0 3.6 0l7.2-5"/></symbol>
+<symbol id="i-newspaper" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 0 1 2 2v12a1.5 1.5 0 0 1-1.5 1.5H6A2 2 0 0 1 4 18.5z"/><path d="M19 8h1.5A1.5 1.5 0 0 1 22 9.5v9a1.5 1.5 0 0 1-3 0"/><line x1="7.5" y1="9" x2="13.5" y2="9"/><line x1="7.5" y1="12.3" x2="13.5" y2="12.3"/><line x1="7.5" y1="15.6" x2="13.5" y2="15.6"/></symbol>
+<symbol id="i-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="4.5" width="13" height="17" rx="2"/><rect x="9" y="2.5" width="6" height="3.5" rx="1"/><line x1="8.5" y1="11" x2="15.5" y2="11"/><line x1="8.5" y1="15" x2="15.5" y2="15"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 14.5 14.5 9.5"/><path d="M11 6.5 13 4.5a3.5 3.5 0 0 1 5 5l-2 2"/><path d="M13 17.5 11 19.5a3.5 3.5 0 0 1-5-5l2-2"/></symbol>
+<symbol id="i-banknote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6.5" width="19" height="11" rx="2"/><circle cx="12" cy="12" r="2.6"/><line x1="6" y1="9.5" x2="6" y2="9.6"/><line x1="18" y1="14.5" x2="18" y2="14.6"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 3.5l17 17"/><path d="M10.6 5.7A10.6 10.6 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a16.4 16.4 0 0 1-3.2 4.1M6.6 6.9C4 8.7 2.5 12 2.5 12s3.5 6.5 9.5 6.5a9.8 9.8 0 0 0 3.4-.6"/><path d="M9.5 12a2.5 2.5 0 0 0 3.6 2.2M14.3 13.8A2.5 2.5 0 0 0 11.8 9.6"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.3 2"/></symbol>
+<symbol id="i-broadcast" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.2"/><path d="M8.3 15.7a5.2 5.2 0 0 1 0-7.4M15.7 8.3a5.2 5.2 0 0 1 0 7.4"/><path d="M5.2 18.8a9.8 9.8 0 0 1 0-13.6M18.8 5.2a9.8 9.8 0 0 1 0 13.6"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h4.6l2 2.2H19.5A1.5 1.5 0 0 1 21 8.7v9.3a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18z"/></symbol>
+<symbol id="i-id-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><circle cx="8" cy="11" r="2"/><path d="M5.3 16c.5-1.6 1.6-2.4 2.7-2.4s2.2.8 2.7 2.4"/><line x1="14" y1="9.3" x2="18.5" y2="9.3"/><line x1="14" y1="12.3" x2="18.5" y2="12.3"/></symbol>
+<symbol id="i-bank" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10 12 4l9 6"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="5.5" y1="10" x2="5.5" y2="18"/><line x1="10" y1="10" x2="10" y2="18"/><line x1="14" y1="10" x2="14" y2="18"/><line x1="18.5" y1="10" x2="18.5" y2="18"/><line x1="3.5" y1="20.5" x2="20.5" y2="20.5"/></symbol>
+<symbol id="i-mobile-pay" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.2"/><line x1="10" y1="18.3" x2="14" y2="18.3"/><path d="M9.3 10.3h5.4M10.3 13.3h3.4" stroke-linecap="round"/><circle cx="12" cy="7.6" r="1.6"/></symbol>
+<symbol id="i-crypto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2.5 19.5 10 12 17.5 4.5 10z"/><path d="M12 2.5v15M4.5 10h15" stroke-width="1.3"/><path d="M12 17.5 19.5 10M12 17.5 4.5 10" stroke-width="1.3"/></symbol>
+<symbol id="i-wave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13.5V7a1.5 1.5 0 0 1 3 0v4.5"/><path d="M10 11V5a1.5 1.5 0 0 1 3 0v6.5"/><path d="M13 11V6a1.5 1.5 0 0 1 3 0v8"/><path d="M16 12v-3a1.5 1.5 0 0 1 3 0v6c0 3.3-2.2 6-6 6h-1c-2.4 0-3.6-.7-5-2.2L4 15.7c-.6-.7-.5-1.6.2-2.1.6-.5 1.4-.4 2 .2l1.8 1.7"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5h18"/><rect x="5.5" y="12" width="3" height="8.5"/><rect x="10.5" y="7" width="3" height="13.5"/><rect x="15.5" y="15" width="3" height="5.5"/></symbol>
+<symbol id="i-bag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12.5H5z"/><path d="M9 8a3 3 0 0 1 6 0"/></symbol>
+<symbol id="i-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/></symbol>
+<symbol id="i-dot" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="12" r="6"/></symbol>
+</svg>
+
+<div id="view-landing" data-landing-theme="dark">
+<div class="sv">
+<div class="auth-modal is-open admin-signin" id="authModal" aria-hidden="false">
+  <div class="auth-card" role="dialog" aria-labelledby="authTitle">
+    <main class="auth-main">
+      <div class="brand-logo admin-login-logo"><img src="assets/img/logo.svg" alt="Repuven" width="44" height="44"><span><img class="rv-word" src="assets/img/wordmark.svg" alt="Repuven"></span><em>Admin</em></div>
+      <h3 id="authTitle">Admin sign in</h3>
+      <p class="auth-sub" id="authSub">Only admin accounts can sign in here.</p>
+      <form class="auth-form active" id="signinForm">
+        <div class="auth-field">
+          <label for="signinEmail">Email address</label>
+          <input id="signinEmail" type="email" placeholder="admin@example.com" autocomplete="email" required>
+        </div>
+        <div class="auth-field">
+          <label for="signinPassword">Password</label>
+          <div class="auth-password-wrap">
+            <input id="signinPassword" type="password" placeholder="Your password" autocomplete="current-password" required>
+            <button type="button" class="auth-toggle-pass" data-toggle-pass="signinPassword">SHOW</button>
+          </div>
+          <div class="admin-forgot"><button type="button" id="forgotPassLink">Forgot password?</button></div>
+        </div>
+        <button class="auth-submit" type="submit">Sign in <svg class="icon-glyph" viewBox="0 0 24 24"><use href="#i-arrow-right"/></svg></button>
+      </form>
+      <div class="auth-status" id="authStatus" aria-live="polite"></div>
+    </main>
+  </div>
+</div>
+</div>
+</div>
+
+<div id="view-auth" style="display:none">
+
+
+<div class="auth-wrap">
+  <aside class="auth-side">
+      <a class="brand" href="#"><span class="mark mark-img"><img src="assets/img/logo.svg" alt="" width="36" height="36"></span><span class="word"><img class="rv-word" src="assets/img/wordmark.svg" alt="Repuven"></span></a>
+      <div>
+        <h2>Admin panel</h2>
+        <p>Reset the password for your admin account.</p>
+      </div>
+      <div class="foot">© <span id="yr"></span> Repuven. All rights reserved.</div>
+    </aside>
+
+  <div class="auth-form-col">
+    <div class="auth-box">
+<!-- RESET PASSWORD REQUEST -->
+      <div class="recovery-card">
+        <div class="recovery-head">
+          <div class="recovery-logo" data-site-logo aria-hidden="true"><span class="recovery-logo-fallback">RV</span></div>
+          <div class="recovery-kicker">Repuven Account Security</div>
+          <div class="panel" id="panel-forgot">
+            <h1>Reset your password</h1>
+            <div class="lead">Enter your account email. We will email you a code to reset your password.</div>
+          </div>
+          <div class="panel" id="panel-newpass">
+            <h1>Create a new password</h1>
+            <div class="lead">Tick the security check, then choose a new password.</div>
+          </div>
+        </div>
+
+        <div class="recovery-body">
+          <div class="recovery-steps" aria-hidden="true">
+            <span class="recovery-step active"><i>1</i> Request</span><span class="recovery-arrow">—</span><span class="recovery-step"><i>2</i> Verify</span><span class="recovery-arrow">—</span><span class="recovery-step"><i>3</i> New password</span>
+          </div>
+          <div class="panel" id="panel-forgot-body">
+            <form id="form-forgot" novalidate>
+              <div class="field">
+                <label for="fg-email">Email address</label>
+                <input class="input" id="fg-email" type="email" required autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="field error" id="forgot-err" style="display:none;"></div>
+              <button class="btn btn-primary btn-block" id="forgot-submit" type="submit"><span class="btn-label">Send code</span></button>
+            </form>
+            <form id="form-code" class="recovery-code" novalidate hidden>
+              <p class="recovery-code-note" id="code-note">We sent a code to your email.</p>
+              <div class="field">
+                <label for="fg-code">Code from the email</label>
+                <input class="input code-input" id="fg-code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="12" placeholder="000000" required>
+              </div>
+              <div class="field error" id="code-err" style="display:none;"></div>
+              <button class="btn btn-primary btn-block" id="code-submit" type="submit"><span class="btn-label">Continue</span></button>
+              <div class="recovery-code-links">
+                <button type="button" class="recovery-link" id="code-resend">Send a new code</button>
+                <button type="button" class="recovery-link" id="code-change">Use another email</button>
+              </div>
+            </form>
+            <div class="recovery-footer">The code works for 1 hour. If you cannot find the email, check your Spam folder.</div>
+          </div>
+
+          <div class="panel" id="panel-newpass-body">
+            <div class="security-check" id="robot-check-wrap">
+              <div class="robot-row">
+                <div class="security-shield" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 19 6v5.2c0 4.2-2.8 7.7-7 9.6-4.2-1.9-7-5.4-7-9.6V6l7-2.8Z"/><path d="m8.8 12 2.1 2.1 4.5-4.5"/></svg></div>
+                <input class="robot-check" id="robot-check" type="checkbox" aria-label="I'm not a robot">
+                <div class="robot-copy"><span>I'm not a robot</span><small>Quick security verification</small></div>
+                <span class="security-state" aria-hidden="true">Secure</span>
+              </div>
+              <div class="robot-status" id="robot-status">Checking your browser…</div>
+            </div>
+
+            <form id="form-newpass" class="password-area" novalidate>
+              <div class="field">
+                <label for="np-pass">New password</label>
+                <input class="input" id="np-pass" type="password" required minlength="6" autocomplete="new-password" placeholder="Create a strong password">
+                <div class="password-strength"><span id="password-strength-bar"></span></div>
+                <div class="password-hint" id="password-hint">Use at least 6 characters.</div>
+              </div>
+              <div class="field">
+                <label for="np-pass-confirm">Confirm new password</label>
+                <input class="input" id="np-pass-confirm" type="password" required minlength="6" autocomplete="new-password" placeholder="Enter the password again">
+              </div>
+              <div class="field error" id="newpass-err" style="display:none;"></div>
+              <button class="btn btn-primary btn-block" id="newpass-submit" type="submit"><span class="btn-label">Save new password</span></button>
+            </form>
+            <div class="recovery-footer">You can log in with your new password right away.</div>
+          </div>
+          <div class="recovery-bottom" style="display:flex!important;margin-top:20px;color:#68737c;font-size:11px;">Remembered your password? <a href="#auth/signin" style="color:#aeb7be;text-decoration:none;margin-left:5px;">Log in</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+</div>
+
+<div id="view-app" style="display:none">
+<div class="app-shell">
+  <div class="sidebar-scrim" id="sidebar-scrim"></div>
+  <aside class="app-sidebar" id="app-sidebar"></aside>
+  <main class="app-main">
+    <div class="app-topbar">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="menu-toggle" id="menu-toggle"><svg class="icon-glyph" viewBox="0 0 24 24"><use href="#i-menu"/></svg></button>
+        <div><h1 id="topbar-title">Home</h1><div class="sub" id="topbar-sub"></div></div>
+      </div>
+      <div id="topbar-actions"></div>
+    </div>
+    <div class="app-content-outer">
+      <div id="page-admin" class="page-section" style="display:none">
+<div class="app-content">
+
+      <div class="atabs">
+        <button data-tab="overview">Overview</button>
+        <button data-tab="articles">Articles</button>
+        <button data-tab="products">Tasks &amp; Sectors</button>
+        <button data-tab="usertasks">User Tasks</button>
+        <button data-tab="submissions">Submissions</button>
+        <button data-tab="verifications">Verifications</button>
+        <button data-tab="withdrawals">Withdrawals</button>
+        <button data-tab="transactions">Transactions</button><button data-tab="deposits">Deposits</button><button data-tab="payments">Payments</button><button data-tab="social">Social Links</button><button data-tab="members">Members</button><button data-tab="referrals">Referrals</button><button data-tab="team">Team</button><button data-tab="vip">VIP Links</button><button data-tab="investors">Investors Bank</button><button data-tab="leadership">Leadership</button><button data-tab="announcements">Announcements</button>
+        <button data-tab="mailbox">Mailbox</button>
+        <button data-tab="support">Support Chat</button>
+        <button data-tab="livechat">Live Chat</button>
+        <button data-tab="leaderboard">Leaderboard Prizes</button>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="apane" id="pane-overview">
+        <div class="grid grid-4" id="ov-stats">
+          <div class="skel" style="height:90px;"></div><div class="skel" style="height:90px;"></div>
+          <div class="skel" style="height:90px;"></div><div class="skel" style="height:90px;"></div>
+        </div>
+        <div class="grid grid-3" style="margin-top:16px;" id="ov-stats-2">
+          <div class="stat-card"><div class="label">Pending submissions</div><div class="value" id="ov-pending-subs">0</div></div>
+          <div class="stat-card"><div class="label">Pending verifications</div><div class="value" id="ov-pending-verif">0</div></div>
+          <div class="stat-card"><div class="label">Pending withdrawals</div><div class="value" id="ov-pending-wd">0</div></div>
+          <div class="stat-card"><div class="label">Pending user tasks</div><div class="value" id="ov-pending-tasks">0</div></div>
+          <div class="stat-card"><div class="label">Pending deposits</div><div class="value" id="ov-pending-dep">0</div></div>
+        </div>
+        <div class="ov-sup" id="ov-sup"><div class="skel" style="height:120px;"></div></div>
+      </div>
+
+      <!-- ARTICLES -->
+      <div class="apane" id="pane-articles">
+        <div class="row-between"><div></div><button class="btn btn-primary btn-sm" id="new-article-btn">+ New article</button></div>
+        <div class="admin-card-list" id="articles-list"><div class="skel" style="height:70px;"></div></div>
+      </div>
+
+      <!-- PRODUCTS -->
+      <div class="apane" id="pane-products">
+        <div class="row-between"><div><button class="btn btn-secondary btn-sm" id="manage-sectors-btn">Manage sectors</button></div><div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="btn btn-secondary btn-sm" id="bulk-product-btn">+ Bulk add</button><button class="btn btn-primary btn-sm" id="new-product-btn">+ New product</button></div></div>
+        <div class="sec-bar" id="sec-bar"></div>
+        <div class="admin-card-list" id="products-list"><div class="skel" style="height:70px;"></div></div>
+      </div>
+
+      <!-- USER TASKS (pending pricing) -->
+      <div class="apane" id="pane-usertasks">
+        <div class="admin-card-list" id="usertasks-list"><div class="skel" style="height:100px;"></div></div>
+      </div>
+
+      <!-- SUBMISSIONS -->
+      <div class="apane" id="pane-submissions">
+        <div class="admin-card-list" id="submissions-list"><div class="skel" style="height:100px;"></div></div>
+      </div>
+
+      <!-- VERIFICATIONS -->
+      <div class="apane" id="pane-verifications">
+        <div class="admin-card-list" id="verif-list"><div class="skel" style="height:100px;"></div></div>
+      </div>
+
+      <!-- WITHDRAWALS -->
+      <div class="apane" id="pane-withdrawals">
+        <div class="adx adx-settings" id="pay-settings"></div>
+        <div class="admin-card-list" id="wd-list"><div class="skel" style="height:100px;"></div></div>
+      </div>
+
+      <!-- DEPOSITS -->
+      <div class="apane" id="pane-deposits">
+        <div class="bka" id="bka-root"><div class="skel" style="height:220px;"></div></div>
+        <div class="admin-card-list" id="deposits-list"><div class="skel" style="height:100px;"></div></div>
+      </div>
+    <div class="apane" id="pane-social">
+      <div class="pay-admin-intro">
+        <h3>Social media links</h3>
+        <p>Paste your page links here. Each one shows as an icon at the bottom of the landing page. Leave a box empty to hide that icon.</p>
+      </div>
+      <div id="social-admin"><div class="skel" style="height:200px;"></div></div>
+    </div>
+    <div class="apane" id="pane-payments">
+      <div class="pay-admin-intro">
+        <h3>Deposit methods</h3>
+        <p>Turn Binance or bKash on or off, and set the number people send money to. The Deposit page changes right away.</p>
+      </div>
+      <div class="field error" id="pay-admin-err" style="display:none;"></div>
+      <div class="pay-admin-list" id="pay-admin-list">
+        <form class="pay-admin-card" data-method="BINANCE" autocomplete="off">
+          <div class="pay-admin-top">
+            <span class="pay-admin-logo"><span class="pay-logo pay-binance-mark" aria-hidden="true"></span></span>
+            <div class="pay-admin-name"><strong>Binance</strong><span class="pay-admin-state">Open</span></div>
+            <label class="pay-switch" title="Open or close Binance deposits">
+              <input type="checkbox" name="is_open" checked>
+              <span class="pay-switch-track" aria-hidden="true"></span>
+              <span class="sr-only">Binance deposits open</span>
+            </label>
+          </div>
+          <label class="pay-admin-label" for="pay-acc-binance">Binance Pay ID</label>
+          <div class="pay-admin-row">
+            <input class="input" id="pay-acc-binance" name="account" type="text" value="1221294000" inputmode="numeric">
+            <button class="btn btn-primary" type="submit"><span class="btn-label">Save</span></button>
+          </div>
+          <p class="pay-admin-updated"></p>
+        </form>
+        <form class="pay-admin-card" data-method="BKASH" autocomplete="off">
+          <div class="pay-admin-top">
+            <span class="pay-admin-logo"><span class="pay-logo pay-bkash-mark" aria-hidden="true"></span></span>
+            <div class="pay-admin-name"><strong>bKash</strong><span class="pay-admin-state">Open</span></div>
+            <label class="pay-switch" title="Open or close bKash deposits">
+              <input type="checkbox" name="is_open" checked>
+              <span class="pay-switch-track" aria-hidden="true"></span>
+              <span class="sr-only">bKash deposits open</span>
+            </label>
+          </div>
+          <label class="pay-admin-label" for="pay-acc-bkash">bKash number</label>
+          <div class="pay-admin-row">
+            <input class="input" id="pay-acc-bkash" name="account" type="text" value="01303902372" inputmode="numeric">
+            <button class="btn btn-primary" type="submit"><span class="btn-label">Save</span></button>
+          </div>
+          <p class="pay-admin-updated"></p>
+        </form>
+      </div>
+    </div>
+    <div class="apane" id="pane-members">
+      <div class="mb-stats" id="mb-stats"><div class="skel" style="height:92px;"></div></div>
+      <div class="mb-bar">
+        <div class="mb-tabs" role="tablist" aria-label="Member lists">
+          <button type="button" role="tab" data-mb-list="new" class="active">New <span data-mb-count="new"></span></button>
+          <button type="button" role="tab" data-mb-list="check">Check list <span data-mb-count="check"></span></button>
+          <button type="button" role="tab" data-mb-list="verified">Verified <span data-mb-count="verified"></span></button>
+          <button type="button" role="tab" data-mb-list="all">All <span data-mb-count="total"></span></button>
+        </div>
+        <input class="input mb-search" id="mb-search" type="search" placeholder="Search name, email or phone" autocomplete="off">
+      </div>
+      <p class="mb-note" id="mb-note"></p>
+      <div class="mb-list" id="mb-list"></div>
+      <div class="field error" id="mb-err" style="display:none;"></div>
+      <div class="mb-more-wrap"><button class="btn btn-secondary btn-sm" type="button" id="mb-more" hidden>Show more</button></div>
+    </div>
+    <div class="apane" id="pane-referrals">
+      <div class="mb-stats rf-stats" id="rf-stats"><div class="skel" style="height:92px;"></div></div>
+      <div class="rf-top" id="rf-top"></div>
+      <div class="rf-who" id="rf-who" hidden></div>
+      <div class="mb-bar">
+        <div class="mb-tabs" role="tablist" aria-label="Kind of link">
+          <button type="button" role="tab" data-rf-kind="all" class="active">All <span data-rf-count="total"></span></button>
+          <button type="button" role="tab" data-rf-kind="refer">Refer link <span data-rf-count="refer"></span></button>
+          <button type="button" role="tab" data-rf-kind="free">Free link <span data-rf-count="free"></span></button>
+          <button type="button" role="tab" data-rf-kind="vip">VIP link <span data-rf-count="vip"></span></button>
+          <button type="button" role="tab" data-rf-kind="investor">Investor link <span data-rf-count="investor"></span></button>
+        </div>
+        <input class="input mb-search" id="rf-search" type="search" placeholder="Search member or inviter: name, email, code" autocomplete="off">
+      </div>
+      <p class="mb-note" id="rf-note"></p>
+      <div class="mb-list rf-list" id="rf-list"></div>
+      <div class="field error" id="rf-err" style="display:none;"></div>
+      <div class="mb-more-wrap"><button class="btn btn-secondary btn-sm" type="button" id="rf-more" hidden>Show more</button></div>
+    </div>
+    <div class="apane" id="pane-transactions">
+      <div class="mb-stats" id="tx-stats"><div class="skel" style="height:92px;"></div></div>
+      <div class="rf-who tx-member" id="tx-member" hidden></div>
+      <div class="mb-bar">
+        <div class="mb-tabs" role="tablist" aria-label="Kind of transaction">
+          <button type="button" role="tab" data-tx-group="all" class="active">All <span data-tx-count="all"></span></button>
+          <button type="button" role="tab" data-tx-group="deposit">Deposits <span data-tx-count="deposit"></span></button>
+          <button type="button" role="tab" data-tx-group="withdraw">Withdrawals <span data-tx-count="withdraw"></span></button>
+          <button type="button" role="tab" data-tx-group="task">Task rewards <span data-tx-count="task"></span></button>
+          <button type="button" role="tab" data-tx-group="bonus">Commissions <span data-tx-count="bonus"></span></button>
+          <button type="button" role="tab" data-tx-group="verify">Verification <span data-tx-count="verify"></span></button>
+          <button type="button" role="tab" data-tx-group="transfer">Transfers <span data-tx-count="transfer"></span></button>
+          <button type="button" role="tab" data-tx-group="other" hidden>Other <span data-tx-count="other"></span></button>
+        </div>
+      </div>
+      <div class="tx-filters">
+        <input class="input mb-search" id="tx-search" type="search" placeholder="Search name, email, member code or transaction code" autocomplete="off">
+        <div class="tx-dates">
+          <label><small>From</small><input class="input" id="tx-from" type="date"></label>
+          <label><small>To</small><input class="input" id="tx-to" type="date"></label>
+        </div>
+        <div class="tx-quick" role="group" aria-label="Time">
+          <button type="button" data-tx-days="0">Today</button>
+          <button type="button" data-tx-days="7">7 days</button>
+          <button type="button" data-tx-days="30">30 days</button>
+          <button type="button" data-tx-days="all" class="active">All time</button>
+        </div>
+        <button class="btn btn-secondary btn-sm" type="button" id="tx-csv">Download CSV</button>
+      </div>
+      <p class="mb-note tx-sums" id="tx-sums"></p>
+      <div class="mb-list tx-list" id="tx-list"></div>
+      <div class="field error" id="tx-err" style="display:none;"></div>
+      <div class="mb-more-wrap"><button class="btn btn-secondary btn-sm" type="button" id="tx-more" hidden>Show more</button></div>
+    </div>
+    <div class="apane" id="pane-team">
+      <div class="vip-admin-intro">
+        <h3>Supportive admins</h3>
+        <p>Make a link for someone who helps you run Repuven. The person who creates an account with it signs in to this admin panel and sees only the work you allow. You can change it, turn the access off or delete the account at any time. One link works for one account.</p>
+      </div>
+      <form class="team-new" id="team-new-form" autocomplete="off">
+        <div class="field">
+          <label for="team-new-label">Name (only you see it)</label>
+          <input class="input" id="team-new-label" type="text" maxlength="80" placeholder="Example: Rahim, deposits">
+        </div>
+        <fieldset class="team-perms">
+          <legend>What they can do</legend>
+          <label class="team-perm"><input type="checkbox" name="surveys" checked><span><b>Check survey tasks</b><small>Approve or reject the proof members send</small></span></label>
+          <label class="team-perm"><input type="checkbox" name="deposits"><span><b>Check deposits</b><small>Approve or reject deposits that wait for a check</small></span></label>
+          <label class="team-perm"><input type="checkbox" name="support"><span><b>Reply in Support Chat</b><small>Answer members as Repuven</small></span></label>
+          <label class="team-perm"><input type="checkbox" name="members"><span><b>See the members list</b><small>New, check list and verified members with email and phone. No balances.</small></span></label>
+        </fieldset>
+        <button class="btn btn-primary" type="submit"><span class="btn-label">Make link</span></button>
+      </form>
+      <div class="field error" id="team-err" style="display:none;"></div>
+      <div class="team-list" id="team-list"><div class="skel" style="height:120px;"></div></div>
+    </div>
+    <div class="apane" id="pane-vip">
+      <div class="vip-admin-intro">
+        <h3>VIP links</h3>
+        <p>Make a link and send it to someone. When they join with it, they get a VIP account. They do not need verification and they do not see tasks. They can only invite people and withdraw. You are their referrer, so you get your share by the normal referral rules. Every VIP member also has a free link: people who join with it can work without the $20 verification, the VIP member earns nothing from them, and they can withdraw only after 3 people they invite verify.</p>
+      </div>
+      <form class="vip-admin-new" id="vip-new-form" autocomplete="off">
+        <div class="field">
+          <label for="vip-new-label">Name (only you see it)</label>
+          <input class="input" id="vip-new-label" type="text" maxlength="80" placeholder="Example: For Rahim">
+        </div>
+        <div class="field">
+          <label for="vip-new-max">How many people can use it</label>
+          <input class="input" id="vip-new-max" type="number" min="1" max="100000" step="1" inputmode="numeric" placeholder="No limit">
+        </div>
+        <button class="btn btn-primary" type="submit"><span class="btn-label">Make VIP link</span></button>
+      </form>
+      <div class="field error" id="vip-admin-err" style="display:none;"></div>
+      <div class="vip-admin-list" id="vip-links-list"><div class="skel" style="height:96px;"></div></div>
+
+      <div class="vip-admin-members-head">
+        <h3 id="vip-members-title">All VIP members</h3>
+        <button class="btn btn-secondary btn-sm" type="button" id="vip-members-all" hidden>Show all</button>
+      </div>
+      <div class="table-wrap" id="vip-members-wrap"><div class="skel" style="height:96px;"></div></div>
+    </div>
+    <div class="apane" id="pane-investors">
+      <section class="ib-hero">
+        <div class="ib-hero-main">
+          <p class="ib-kicker"><i></i>Investors Bank</p>
+          <div class="ib-total" id="ib-total">$0.00</div>
+          <p class="ib-sub" id="ib-sub">What is left of every $20 verification after member bonuses and $4 website management, plus every withdrawal and transfer fee</p>
+        </div>
+        <div class="ib-hero-side">
+          <div class="ib-stat"><span>This month</span><b id="ib-month">$0.00</b><small id="ib-month-count">0 members</small></div>
+          <div class="ib-stat"><span>Members counted</span><b id="ib-count">0</b><small>verified with $20</small></div>
+          <div class="ib-stat"><span>Average per member</span><b id="ib-avg">$0.00</b><small>after referral shares</small></div>
+        </div>
+      </section>
+
+      <section class="inv-admin" id="inv-admin">
+        <div class="inv-admin-head">
+          <h3>Investors</h3>
+          <p>Make an investor link with a share % and send it to one person. When they join with it, they become an investor with that share. Two days before each month ends, each investor gets their % of the pool in their wallet. The % nobody holds stays with Repuven. You can change anyone's % below.</p>
+        </div>
+        <div class="inv-admin-stats">
+          <div><span>In the pool now</span><b id="inv-a-pool">$0.00</b><small>not shared yet</small></div>
+          <div><span>Next payout</span><b id="inv-a-next">—</b><small>Bangladesh time</small></div>
+          <div><span>Share given</span><b id="inv-a-count">0%</b><small id="inv-a-count-sub">to investors</small></div>
+          <div><span>Company keeps now</span><b id="inv-a-each">$0.00</b><small id="inv-a-each-sub">if it was shared today</small></div>
+        </div>
+        <form class="vip-admin-new" id="inv-new-form" autocomplete="off">
+          <div class="field">
+            <label for="inv-new-label">Name (only you see it)</label>
+            <input class="input" id="inv-new-label" type="text" maxlength="80" placeholder="Example: For Karim">
+          </div>
+          <div class="field">
+            <label for="inv-new-pct">Share %</label>
+            <input class="input" id="inv-new-pct" type="number" min="0.001" max="100" step="0.001" inputmode="decimal" placeholder="Example: 18" required>
+          </div>
+          <button class="btn btn-primary" type="submit"><span class="btn-label">Make investor link</span></button>
+        </form>
+        <div class="inv-sharebar" id="inv-sharebar"></div>
+        <div class="field error" id="inv-admin-err" style="display:none;"></div>
+        <div class="vip-admin-list" id="inv-links-list"><div class="skel" style="height:96px;"></div></div>
+        <div class="inv-admin-two">
+          <section class="ib-panel">
+            <div class="ib-panel-head"><h3>Investors</h3><span id="inv-people-count"></span></div>
+            <div class="table-wrap" id="inv-people"><div class="skel" style="height:80px;"></div></div>
+          </section>
+          <section class="ib-panel">
+            <h3>Monthly payouts</h3>
+            <div class="table-wrap" id="inv-payouts"><div class="skel" style="height:80px;"></div></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="ib-how">
+        <h3>How each $20 is split</h3>
+        <div class="ib-flow">
+          <div class="ib-step"><b>$20.00</b><span>Member pays to verify</span></div>
+          <i aria-hidden="true">−</i>
+          <div class="ib-step"><b>$3.50</b><span>To the person who invited them</span></div>
+          <i aria-hidden="true">−</i>
+          <div class="ib-step"><b>$2.00</b><span>To the person above the inviter</span></div>
+          <i aria-hidden="true">−</i>
+          <div class="ib-step"><b>$1.80</b><span>To leaders: $0.80 bonus + $1.00 pool</span></div>
+          <i aria-hidden="true">=</i>
+          <div class="ib-step"><b>$12.70</b><span>Left over</span></div>
+          <i aria-hidden="true">−</i>
+          <div class="ib-step"><b>$4.00</b><span>Website management</span></div>
+          <i aria-hidden="true">=</i>
+          <div class="ib-step is-bank"><b>$8.70</b><span>Goes to the Investor Pool</span></div>
+        </div>
+        <p class="ib-note">When nobody is above the inviter, there is no $2.00 share, and when there is no leader bonus, that $0.80 stays too: both go to the pool. Withdrawal fees (10%) and transfer fees (2%) go to the pool in full. Each investor gets their % of the pool; the rest stays with Repuven.</p>
+      </section>
+
+      <div class="field error" id="ib-err" style="display:none;"></div>
+
+      <div class="ib-grid">
+        <section class="ib-panel">
+          <h3>By month</h3>
+          <div class="ib-months" id="ib-months"><div class="skel" style="height:80px;"></div></div>
+        </section>
+        <section class="ib-panel">
+          <div class="ib-panel-head"><h3>Every payment</h3><span id="ib-entries-count"></span></div>
+          <div class="table-wrap" id="ib-entries"><div class="skel" style="height:120px;"></div></div>
+        </section>
+      </div>
+    </div>
+    <div class="apane" id="pane-leadership">
+      <section class="ib-hero lp-hero">
+        <div class="ib-hero-main">
+          <p class="ib-kicker"><i></i>Leader Pool</p>
+          <div class="ib-total" id="lp-pool">$0.00</div>
+          <p class="ib-sub" id="lp-sub">5% of every $20 verification. Shared among all leaders 2 days before each month ends.</p>
+        </div>
+        <div class="ib-hero-side">
+          <div class="ib-stat"><span>Next payout</span><b id="lp-next">—</b><small id="lp-next-sub">Bangladesh time</small></div>
+          <div class="ib-stat"><span>Coming in this month</span><b id="lp-month">$0.00</b><small id="lp-month-sub">0 verifications</small></div>
+          <div class="ib-stat"><span>Leaders</span><b id="lp-leaders">0</b><small id="lp-leaders-sub">0 shares in total</small></div>
+          <div class="ib-stat"><span>Bonus waiting</span><b id="lp-held">$0.00</b><small>held for members' next level</small></div>
+        </div>
+      </section>
+
+      <section class="ib-how">
+        <h3>The five levels</h3>
+        <div class="lp-levels" id="lp-levels"></div>
+        <p class="ib-note">From every $20 verification, $0.80 is held for the person who invited the member and paid when they reach their next level (at the top level it is paid straight away), and $1.00 (5%) goes into the Leader Pool. On the payout day the pool is shared by shares: a leader gets as many shares as their level number. Every new level and every payout sends a message to the member's Mailbox.</p>
+      </section>
+
+      <div class="field error" id="lp-err" style="display:none;"></div>
+
+      <div class="lp-grid">
+        <section class="ib-panel">
+          <div class="ib-panel-head"><h3>Leaders</h3><span id="lp-leaders-count"></span></div>
+          <div class="table-wrap" id="lp-leaders-list"><div class="skel" style="height:120px;"></div></div>
+        </section>
+        <section class="ib-panel">
+          <div class="ib-panel-head"><h3>Close to leadership</h3><span>most verified referrals</span></div>
+          <div id="lp-rising"><div class="skel" style="height:120px;"></div></div>
+        </section>
+      </div>
+
+      <section class="ib-panel lp-payouts-panel">
+        <div class="ib-panel-head"><h3>Monthly payouts</h3><span id="lp-paid-total"></span></div>
+        <div class="table-wrap" id="lp-payouts"><div class="skel" style="height:90px;"></div></div>
+      </section>
+    </div>
+
+    <div class="apane" id="pane-announcements">
+      <div class="an-intro">
+        <h3>Announcements</h3>
+        <p>Members see an announcement as a pop-up right after they log in. Pick how long it stays. When the time is up it disappears by itself, or you can take it down earlier.</p>
+      </div>
+
+      <div class="an-grid">
+        <form class="an-form" id="an-form" autocomplete="off" novalidate>
+          <div class="field">
+            <label>Picture <span class="an-optional">optional</span></label>
+            <label class="an-drop" id="an-drop" for="an-file">
+              <img id="an-drop-img" alt="" hidden>
+              <span class="an-drop-empty" id="an-drop-empty"><svg class="icon-glyph" viewBox="0 0 24 24"><use href="#i-download"/></svg><b>Choose a picture</b><small>JPG, PNG or WebP · up to 5 MB · wide pictures look best</small></span>
+            </label>
+            <input type="file" id="an-file" accept="image/jpeg,image/png,image/webp" hidden>
+            <button type="button" class="an-link-btn" id="an-file-clear" hidden>Remove picture</button>
+          </div>
+          <div class="field">
+            <label for="an-title">Title</label>
+            <input class="input" id="an-title" type="text" maxlength="120" placeholder="Example: Withdrawals are open again">
+            <div class="an-count"><span id="an-title-count">0</span> / 120</div>
+          </div>
+          <div class="field">
+            <label for="an-body">Description</label>
+            <textarea class="input" id="an-body" maxlength="2000" rows="4" placeholder="Write what members should know."></textarea>
+          </div>
+          <div class="field">
+            <label>How long should it stay?</label>
+            <div class="an-chips" id="an-chips" role="radiogroup" aria-label="How long it stays">
+              <button type="button" class="an-chip" data-min="60" role="radio">1 hour</button>
+              <button type="button" class="an-chip" data-min="360" role="radio">6 hours</button>
+              <button type="button" class="an-chip" data-min="720" role="radio">12 hours</button>
+              <button type="button" class="an-chip is-on" data-min="1440" role="radio" aria-checked="true">1 day</button>
+              <button type="button" class="an-chip" data-min="4320" role="radio">3 days</button>
+              <button type="button" class="an-chip" data-min="10080" role="radio">7 days</button>
+              <button type="button" class="an-chip" data-min="custom" role="radio">Custom</button>
+            </div>
+            <div class="an-custom" id="an-custom" hidden>
+              <input class="input" id="an-custom-n" type="number" min="1" step="1" inputmode="numeric" value="2" aria-label="Amount">
+              <select class="input" id="an-custom-u" aria-label="Unit">
+                <option value="1">minutes</option>
+                <option value="60" selected>hours</option>
+                <option value="1440">days</option>
+              </select>
+            </div>
+            <div class="an-ends" id="an-ends"></div>
+          </div>
+          <div class="field error" id="an-err" style="display:none;"></div>
+          <button class="btn btn-primary btn-block" id="an-submit" type="submit"><span class="btn-label">Publish announcement</span></button>
+        </form>
+
+        <div class="an-preview-wrap">
+          <div class="an-preview-label">What members will see</div>
+          <div class="an-preview">
+            <div class="an-preview-media" id="an-pv-media" hidden><img id="an-pv-img" alt=""></div>
+            <div class="an-preview-body">
+              <p class="an-preview-kicker">Announcement</p>
+              <h4 id="an-pv-title">Your title</h4>
+              <p id="an-pv-body">Your description shows here.</p>
+              <div class="an-preview-foot"><span id="an-pv-until"></span><span class="an-preview-btn">Got it</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="an-list-head"><h3>Running now</h3><span id="an-list-count"></span></div>
+      <div class="an-list" id="an-list"><div class="skel" style="height:90px;"></div></div>
+    </div>
+
+
+      <!-- MAILBOX -->
+      <div class="apane" id="pane-mailbox">
+        <div class="card card-pad" style="margin-bottom:18px;">
+          <div class="sec-title">Send mailbox notice</div>
+          <div class="sec-sub">Send to every user or to one specific account.</div>
+          <form id="admin-mailbox-form">
+            <div class="grid grid-2">
+              <div class="field">
+                <label>Recipient</label>
+                <select class="input" id="admin-mail-recipient">
+                  <option value="">All users</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Title</label>
+                <input class="input" id="admin-mail-title" maxlength="160" required placeholder="Important notice">
+              </div>
+            </div>
+            <div class="field">
+              <label>Message</label>
+              <textarea class="input" id="admin-mail-body" rows="5" maxlength="10000" required placeholder="Write your notice…"></textarea>
+            </div>
+            <div class="field error" id="admin-mail-err" style="display:none;"></div>
+            <button class="btn btn-primary" type="submit"><span class="btn-label">Send notice</span></button>
+          </form>
+        </div>
+        <div class="admin-card-list" id="admin-mailbox-list"><div class="skel" style="height:100px;"></div></div>
+      </div>
+
+      <!-- SUPPORT CHAT -->
+      <div class="apane" id="pane-support">
+        <div class="as" id="as">
+          <aside class="as-inbox" aria-label="Conversations">
+            <div class="as-inbox-top">
+              <div class="as-title"><b>Inbox</b><span id="as-total"></span></div>
+              <label class="as-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="5.5"/><path d="m13.2 13.2 3.3 3.3"/></svg><input id="as-search" type="search" placeholder="Search name or ID" autocomplete="off" aria-label="Search conversations"></label>
+              <div class="as-filters"><button type="button" class="is-on" data-as-filter="all">All</button><button type="button" data-as-filter="unread">Unread</button></div>
+            </div>
+            <div class="as-list" id="as-list"><div class="skel" style="height:64px;margin:6px 0;border-radius:12px;"></div><div class="skel" style="height:64px;margin:6px 0;border-radius:12px;"></div></div>
+          </aside>
+          <section class="ck-panel as-chat" id="as-chat" aria-label="Conversation">
+            <div class="as-pick" id="as-pick">
+              <span class="ck-empty-ico"><svg class="icon-glyph" viewBox="0 0 24 24"><use href="#i-message"/></svg></span>
+              <b>Pick a conversation</b>
+              <p>Messages members send from Support Chat show up here. Open one to read it and reply.</p>
+            </div>
+            <header class="ck-head" id="as-head" hidden>
+              <button type="button" class="as-back" id="as-back" aria-label="Back to the inbox"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button>
+              <span id="as-head-ava"></span>
+              <div class="ck-head-copy"><b id="as-head-name">Member</b><small id="as-head-sub"></small></div>
+              <div class="ck-head-actions"><button type="button" class="as-ghost" id="as-copy">Copy ID</button></div>
+            </header>
+            <div class="ck-scroll" id="as-scroll" hidden></div>
+            <div class="ck-chips as-saved" id="as-saved" hidden aria-label="Saved replies"></div>
+            <form class="ck-compose" id="as-form" novalidate hidden>
+              <div class="ck-field">
+                <textarea id="as-input" rows="1" maxlength="2000" placeholder="Write a reply…" aria-label="Your reply"></textarea>
+                <button class="ck-send" type="submit" aria-label="Send reply" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5.5 11.5 6.5-6.5 6.5 6.5"/></svg></button>
+              </div>
+              <div class="ck-under"><span class="ck-hint">Enter to send · Shift + Enter for a new line · the member sees it in Support Chat</span><span class="ck-count" hidden></span></div>
+            </form>
+          </section>
+        </div>
+      </div>
+
+      <!-- LIVE CHAT -->
+      <div class="apane" id="pane-livechat">
+        <div class="al">
+          <section class="al-bar">
+            <span class="ck-pill" id="al-state"><i></i><span>Checking…</span></span>
+            <div class="al-bar-copy"><b id="al-state-title">Live Chat</b><small id="al-state-sub">Opening hours are in Bangladesh time.</small></div>
+            <button type="button" class="al-btn is-ghost" id="al-hours-toggle" aria-expanded="false" aria-controls="al-hours"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="M10 6.5V10l2.4 1.6"/></svg>Opening hours</button>
+          </section>
+          <section class="al-hours" id="al-hours" hidden>
+            <div class="al-hours-grid" id="livechat-schedule-grid"></div>
+            <div class="al-hours-foot"><small>Bangladesh time. If the end time is earlier than the start, the chat stays open past midnight.</small><button type="button" class="al-btn" id="livechat-schedule-save">Save hours</button></div>
+          </section>
+          <div class="al-grid">
+            <section class="ck-panel al-room" id="al-room" aria-label="Community chat">
+              <header class="ck-head">
+                <span class="lc-room" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h7A2.5 2.5 0 0 1 16 6.5v4a2.5 2.5 0 0 1-2.5 2.5H9l-3.5 3v-3H6.5A2.5 2.5 0 0 1 4 10.5Z"/><path d="M16 9h1.5A2.5 2.5 0 0 1 20 11.5v4a2.5 2.5 0 0 1-2.5 2.5H17v3l-3.5-3h-3A2.5 2.5 0 0 1 8 15.5V15"/></svg></span>
+                <div class="ck-head-copy"><b>Community chat</b><small id="al-room-sub">Every member can read this room. You post as Repuven.</small></div>
+              </header>
+              <div class="lc-pin" id="al-pin" hidden>
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 3.5h6l-1 4.5 3 3H5l3-3-1-4.5Z"/><path d="M10 11v5.5"/></svg>
+                <div class="lc-pin-copy"><small>Pinned</small><p id="al-pin-text"></p></div>
+                <button type="button" class="as-ghost" id="al-unpin">Unpin</button>
+              </div>
+              <div class="ck-scroll" id="al-scroll"></div>
+              <form class="ck-compose" id="al-form" novalidate>
+                <div class="ck-field">
+                  <textarea id="admin-livechat-input" rows="1" maxlength="2000" placeholder="Write to everyone…" aria-label="Message to everyone"></textarea>
+                  <button class="ck-send" type="submit" aria-label="Send to everyone" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5.5 11.5 6.5-6.5 6.5 6.5"/></svg></button>
+                </div>
+                <div class="ck-under"><span class="ck-hint">Hover a message to pin, remove it, or invite the member to a private chat.</span><span class="ck-count" hidden></span></div>
+              </form>
+            </section>
+            <aside class="al-side">
+              <section class="al-card">
+                <div class="al-card-head"><b>Members</b><span id="al-people-count"></span></div>
+                <label class="as-search"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="5.5"/><path d="m13.2 13.2 3.3 3.3"/></svg><input id="al-search" type="search" placeholder="Search name or ID" autocomplete="off" aria-label="Search members"></label>
+                <div class="al-people" id="livechat-admin-members"><div class="skel" style="height:52px;margin:6px 0;border-radius:12px;"></div><div class="skel" style="height:52px;margin:6px 0;border-radius:12px;"></div></div>
+              </section>
+              <section class="ck-panel al-private" id="al-private" hidden aria-label="Private chat">
+                <header class="ck-head">
+                  <span id="al-p-ava"></span>
+                  <div class="ck-head-copy"><b id="al-p-name">Member</b><small id="al-p-sub"></small></div>
+                  <div class="ck-head-actions"><button type="button" class="as-ghost" id="al-p-close">End chat</button><button type="button" class="as-ghost as-x" id="al-p-hide" aria-label="Hide"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5.5 5.5 9 9M14.5 5.5l-9 9"/></svg></button></div>
+                </header>
+                <div class="ck-scroll" id="al-pscroll"></div>
+                <form class="ck-compose" id="al-pform" novalidate>
+                  <div class="ck-field">
+                    <textarea id="admin-private-input" rows="1" maxlength="2000" placeholder="Write a private message…" aria-label="Private message"></textarea>
+                    <button class="ck-send" type="submit" aria-label="Send private message" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5.5 11.5 6.5-6.5 6.5 6.5"/></svg></button>
+                  </div>
+                </form>
+              </section>
+            </aside>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEADERBOARD PRIZES -->
+      <div class="apane" id="pane-leaderboard">
+        <div class="card card-pad" style="margin-bottom:16px;">
+          <div class="livechat-admin-toolbar">
+            <div><div class="sec-title">Top 10 partners right now</div><div class="sec-sub">The same list members see on their Leaderboard page.</div></div>
+            <button class="btn btn-secondary btn-sm" id="admin-top10-refresh" type="button">Refresh</button>
+          </div>
+          <div class="adm-top10" id="admin-top10"><div class="skel" style="height:200px;border-radius:14px;grid-column:1/-1;"></div></div>
+        </div>
+        <div class="card card-pad">
+          <div class="livechat-admin-toolbar">
+            <div><div class="sec-title">Leaderboard Prize Campaigns</div><div class="sec-sub">Set a prize period and the rewards for the top 3 referral members.</div></div>
+            <span class="livechat-pill">Top 3</span>
+          </div>
+          <form id="admin-prize-form" class="prize-admin-form">
+            <div class="grid grid-2">
+              <div class="field"><label>Campaign title</label><input class="input" id="prize-title" maxlength="120" placeholder="3 Month Referral Challenge" required></div>
+              <div class="field"><label>Description</label><input class="input" id="prize-description" maxlength="240" placeholder="Top 3 members at the end of the period receive prizes."></div>
+            </div>
+            <div class="grid grid-2">
+              <div class="field"><label>Start date & time</label><input class="input" id="prize-starts" type="datetime-local" required></div>
+              <div class="field"><label>End date & time</label><input class="input" id="prize-ends" type="datetime-local" required></div>
+            </div>
+            <div class="prize-amount-grid">
+              <div class="prize-admin-amount first"><span><svg class="icon-glyph" viewBox="0 0 24 24"><use href="#i-medal"/></svg> 1st Place</span><input class="input" id="prize-first" type="number" min="0" step="0.01" value="50" placeholder="50"></div>
+              <div class="prize-admin-amount second"><span><svg class="icon-glyph" viewBox="0 0 24 24"><use href="#i-medal"/></svg> 2nd Place</span><input class="input" id="prize-second" type="number" min="0" step="0.01" value="25" placeholder="25"></div>
+              <div class="prize-admin-amount third"><span><svg class="icon-glyph" viewBox="0 0 24 24"><use href="#i-medal"/></svg> 3rd Place</span><input class="input" id="prize-third" type="number" min="0" step="0.01" value="10" placeholder="10"></div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;margin-top:12px;"><button class="btn btn-primary" type="submit" id="admin-prize-save">Create Prize Campaign</button></div>
+          </form>
+        </div>
+        <div class="card card-pad" style="margin-top:16px;">
+          <div class="row-between" style="margin-bottom:12px;"><div><div class="sec-title">Campaign History</div><div class="sec-sub">Only an active campaign inside its date range is shown on the public leaderboard.</div></div><button class="btn btn-secondary btn-sm" id="admin-prize-refresh" type="button">Refresh</button></div>
+          <div id="admin-prize-list"><div class="empty-state"><span class="spinner spinner-dark"></span> Loading prize campaigns…</div></div>
+        </div>
+      </div>
+
+    </div>
+</div>
+    </div>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="modal" style="display:none;">
+  <div class="modal">
+    <div class="modal-head"><h2 id="modal-title" style="font-size:17px;margin:0;"></h2><button class="modal-close" id="modal-close"><svg class="icon-glyph" viewBox="0 0 24 24"><use href="#i-x"/></svg></button></div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+</div>
+
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/admin.js"></script>
+<script src="assets/js/alerts.js"></script>
+</body>
+</html>

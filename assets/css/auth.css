@@ -1,0 +1,509 @@
+/* Simple, human-made recovery screen */
+#view-auth{background:#070b09!important;color:#d7e4df!important;min-height:100vh;}
+#view-auth .auth-layout{min-height:100vh;}
+#view-auth .auth-form-col{display:flex;align-items:center;justify-content:center;padding:28px 18px 40px;}
+#view-auth .auth-box{width:min(100%,430px);}
+#view-auth .recovery-card{width:100%!important;padding:0!important;border-radius:18px!important;background:#0f1714!important;border:1px solid #222c28!important;box-shadow:0 18px 55px rgba(0,0,0,.38)!important;overflow:hidden!important;}
+#view-auth .recovery-card:before{display:none!important;}
+#view-auth .recovery-head{padding:30px 30px 20px;text-align:center;border:0;}
+#view-auth .recovery-logo{width:58px!important;height:58px!important;margin:0 auto 18px!important;border-radius:14px!important;background:#161f1b!important;border:1px solid #27342f!important;box-shadow:none!important;overflow:hidden;display:grid;place-items:center;}
+#view-auth .recovery-logo img{width:70%;height:70%;object-fit:contain;filter:none;}
+#view-auth .recovery-logo-fallback{font-size:22px;font-weight:800;color:#ffffff;}
+#view-auth .recovery-kicker{display:none!important;}
+#view-auth .recovery-card h1{margin:0 0 8px!important;color:#dee6e3!important;font-size:25px!important;letter-spacing:-.4px!important;font-weight:750!important;}
+#view-auth .recovery-card .lead{color:#88a497!important;max-width:350px!important;margin:0 auto!important;font-size:13px!important;line-height:1.55!important;}
+#view-auth .recovery-body{padding:0 30px 28px;}
+#view-auth .recovery-nav{display:flex;justify-content:center;gap:20px;margin:0 0 25px;padding-top:2px;}
+#view-auth .recovery-nav a{min-height:auto;padding:0;background:none;border:0;border-radius:0;color:#8ba79a;font-size:12px;font-weight:650;box-shadow:none;}
+#view-auth .recovery-nav a:hover{transform:none;background:none;border:0;color:#d9e5e0;}
+#view-auth .recovery-nav a.primary{background:none!important;color:#00b87a!important;border:0!important;box-shadow:none!important;}
+#view-auth .recovery-steps{display:none!important;}
+#view-auth .recovery-card .field{margin-bottom:15px;}
+#view-auth .recovery-card .field label{color:#b7c9c1!important;font-size:11px!important;font-weight:650!important;margin-bottom:7px;}
+#view-auth .recovery-card .input{color:#dee6e3!important;background:#0a100e!important;border:1px solid #26332e!important;border-radius:9px!important;box-shadow:none!important;min-height:46px;}
+#view-auth .recovery-card .input::placeholder{color:#597568!important;}
+#view-auth .recovery-card .input:focus{border-color:#00a96e!important;box-shadow:0 0 0 2px rgba(0,169,110,.10)!important;}
+#view-auth .recovery-card .btn-primary,#view-auth .recovery-card #forgot-submit,#view-auth .recovery-card #newpass-submit{background:#00a96e!important;color:#ffffff!important;border:0!important;border-radius:9px!important;box-shadow:none!important;min-height:47px;font-size:13px;font-weight:700;}
+#view-auth .recovery-card .btn-primary:hover,#view-auth .recovery-card #forgot-submit:hover,#view-auth .recovery-card #newpass-submit:hover{background:#009b65!important;transform:none;}
+#view-auth .recovery-card .panel{animation:none;}
+#view-auth .recovery-card .security-check{margin:0 0 17px!important;padding:12px!important;border-radius:10px!important;background:#0a100e!important;border:1px solid #26332e!important;box-shadow:none!important;}
+#view-auth .recovery-card .security-check:after{display:none!important;}
+#view-auth .security-shield{background:#141d19!important;color:#00b87a!important;border-color:#26332f!important;}
+#view-auth .robot-check{background:#0a100e!important;border-color:#486055!important;}
+#view-auth .robot-check:checked{background:#00a96e!important;border-color:#00a96e!important;}
+#view-auth .robot-copy{color:#c8d6d0!important;}
+#view-auth .robot-copy small{color:#688678!important;}
+#view-auth .security-state{color:#5f7f70!important;}
+#view-auth .security-check.verified{background:#0c1512!important;border-color:#1d4b3d!important;}
+#view-auth .security-check.verified .robot-status{color:#70c9aa!important;}
+#view-auth .security-check.verified .robot-status:before{background:#00a96e!important;}
+#view-auth .password-strength{background:#232d29!important;}
+#view-auth .password-strength span{background:#00a96e!important;}
+#view-auth .password-hint,#view-auth .recovery-footer{color:#628273!important;}
+#view-auth .recovery-footer{border:0;padding-top:13px;margin-top:14px;text-align:center;font-size:11px;}
+#view-auth .recovery-bottom{display:none!important;}
+#view-auth .recovery-secure{display:none!important;}
+#view-auth .recovery-bg-lock{display:none!important;}
+@media(max-width:650px){
+  #view-auth .auth-form-col{padding:18px 12px 30px!important;}
+  #view-auth .recovery-head{padding:26px 20px 18px!important;}
+  #view-auth .recovery-body{padding:0 20px 25px!important;}
+  #view-auth .recovery-card{border-radius:15px!important;}
+  #view-auth .recovery-card h1{font-size:23px!important;}
+}
+
+/* =========================================================
+   HUMAN PREMIUM AUTH REFRESH — LIGHT / WHITE EDITION
+   Keeps existing IDs, routing and Supabase behavior intact.
+   ========================================================= */
+
+:root{
+  --auth-blue:#28e096;
+  --auth-blue-dark:#1db176;
+  --auth-blue-soft:#cdf8e7;
+  --auth-navy:#173428;
+  --auth-text:#244236;
+  --auth-muted:#6d8e81;
+  --auth-line:#cee1da;
+  --auth-paper:#ffffff;
+  --auth-paper-2:#dbf0e8;
+}
+
+/* ---------- Login / Create Account modal ---------- */
+#view-landing .auth-modal{
+  background:rgba(15,36,27,.42)!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+  padding:22px!important;
+}
+
+#view-landing .auth-card{
+  width:min(100%,980px)!important;
+  min-height:620px!important;
+  grid-template-columns:39% 61%!important;
+  border:1px solid rgba(18,52,38,.10)!important;
+  border-radius:30px!important;
+  background:#ffffff!important;
+  box-shadow:0 38px 110px rgba(16,46,34,.20),0 8px 26px rgba(16,46,34,.08)!important;
+  overflow:hidden!important;
+}
+
+#view-landing .auth-side{
+  background:
+    radial-gradient(circle at 12% 8%,rgba(40,224,150,.16),transparent 34%),
+    radial-gradient(circle at 95% 88%,rgba(101,233,180,.13),transparent 35%),
+    linear-gradient(155deg,#d6f9eb 0%,#cef8e7 54%,#d8f7ea 100%)!important;
+  color:var(--auth-navy)!important;
+  border-right:1px solid #cbe9dd!important;
+  padding:42px 38px!important;
+}
+
+#view-landing .auth-brand{
+  color:var(--auth-navy)!important;
+  font-size:17px!important;
+  letter-spacing:-.3px!important;
+}
+#view-landing .auth-brand span:last-child{color:var(--auth-blue-dark)!important;}
+#view-landing .auth-brand-mark{
+  width:38px!important;height:38px!important;border-radius:12px!important;
+  display:grid!important;place-items:center!important;
+  background:linear-gradient(145deg,#44e4a4,#29bc81)!important;
+  color:#ffffff!important;
+  box-shadow:0 10px 24px rgba(40,224,150,.20)!important;
+}
+
+#view-landing .auth-kicker{
+  color:#5c927d!important;
+  margin-top:64px!important;
+}
+#view-landing .auth-kicker b{background:var(--auth-blue)!important;}
+
+#view-landing .auth-side h2{
+  color:var(--auth-navy)!important;
+  font-size:43px!important;
+  line-height:1.06!important;
+  letter-spacing:-2px!important;
+  margin-top:16px!important;
+}
+#view-landing .auth-side h2 em{
+  background:linear-gradient(90deg,#2abb81,#56e7ad)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  color:transparent!important;
+}
+#view-landing .auth-side p{
+  color:#5e8072!important;
+  line-height:1.75!important;
+}
+#view-landing .auth-stat{
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(49,145,107,.10)!important;
+  box-shadow:0 8px 22px rgba(31,101,73,.05)!important;
+}
+#view-landing .auth-stat strong{color:var(--auth-navy)!important;}
+#view-landing .auth-stat span{color:#75988a!important;}
+#view-landing .auth-feature{color:#496e5f!important;}
+#view-landing .auth-feature i{
+  background:#caf7e5!important;
+  border:1px solid #baf4dd!important;
+  color:#29c386!important;
+}
+
+/* Main form — clean white, like a real financial/account portal */
+#view-landing .auth-main{
+  background:#ffffff!important;
+  padding:48px 54px!important;
+}
+#view-landing .auth-main:before{
+  width:360px!important;height:360px!important;
+  right:-190px!important;top:-190px!important;
+  background:rgba(40,224,150,.055)!important;
+  filter:blur(34px)!important;
+}
+#view-landing .auth-close{
+  width:42px!important;height:42px!important;
+  border-radius:13px!important;
+  background:#dbeee6!important;
+  border:1px solid #cee1da!important;
+  color:#5f7d71!important;
+}
+#view-landing .auth-close:hover{
+  color:#1db176!important;
+  background:#cef8e7!important;
+  box-shadow:0 10px 24px rgba(40,224,150,.12)!important;
+}
+
+#view-landing .auth-main h3{
+  color:var(--auth-navy)!important;
+  font-size:35px!important;
+  letter-spacing:-1.5px!important;
+}
+#view-landing .auth-sub{
+  color:#6f8e82!important;
+  font-size:13px!important;
+}
+
+/* Reference-image style segmented Login / Create account switch */
+#view-landing .auth-tabs{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:0!important;
+  padding:5px!important;
+  margin:28px 0 25px!important;
+  border:1px solid #cddfd8!important;
+  border-radius:13px!important;
+  background:#d9e8e2!important;
+}
+#view-landing .auth-tab{
+  min-height:45px!important;
+  border:0!important;
+  border-radius:9px!important;
+  background:transparent!important;
+  color:#708c81!important;
+  font-weight:800!important;
+  font-size:13px!important;
+  letter-spacing:-.1px!important;
+}
+#view-landing .auth-tab.active{
+  background:#ffffff!important;
+  color:#1c3b2e!important;
+  box-shadow:0 4px 14px rgba(24,59,45,.09)!important;
+}
+
+#view-landing .auth-field label{
+  color:#325144!important;
+  font-size:11.5px!important;
+  font-weight:800!important;
+  letter-spacing:.01em!important;
+}
+#view-landing .auth-field input{
+  background:#ffffff!important;
+  color:#1c3b2e!important;
+  border:1px solid #c6ddd4!important;
+  border-radius:11px!important;
+  min-height:48px!important;
+  box-shadow:inset 0 1px 2px rgba(20,53,40,.025)!important;
+}
+#view-landing .auth-field input::placeholder{color:#94ada3!important;}
+#view-landing .auth-field input:focus{
+  border-color:#65e5b2!important;
+  box-shadow:0 0 0 4px rgba(40,224,150,.10)!important;
+}
+
+#view-landing .auth-submit{
+  min-height:49px!important;
+  border-radius:11px!important;
+  background:linear-gradient(135deg,#32e29c,#29be83)!important;
+  color:#ffffff!important;
+  border:0!important;
+  box-shadow:0 12px 26px rgba(40,224,150,.18)!important;
+  font-weight:800!important;
+}
+#view-landing .auth-submit:hover{
+  transform:translateY(-1px)!important;
+  box-shadow:0 16px 30px rgba(40,224,150,.24)!important;
+}
+#view-landing .auth-toggle-pass{
+  color:#668176!important;
+}
+#view-landing .auth-divider span{color:#8ca79c!important;}
+#view-landing .auth-divider:before,#view-landing .auth-divider:after{background:#d1e1da!important;}
+#view-landing .social-btn{
+  background:#ffffff!important;
+  border:1px solid #cbdfd7!important;
+  color:#3d5f51!important;
+  border-radius:11px!important;
+}
+#view-landing .social-btn:hover{
+  border-color:#a0ebcd!important;
+  background:#d6f9eb!important;
+  box-shadow:0 8px 22px rgba(40,224,150,.08)!important;
+}
+
+/* ---------- Password recovery: white, premium, human-built ---------- */
+#view-auth{
+  background:
+    radial-gradient(circle at 8% 10%,rgba(40,224,150,.07),transparent 28%),
+    radial-gradient(circle at 94% 92%,rgba(78,207,156,.06),transparent 30%),
+    #dbf0e8!important;
+  color:var(--auth-text)!important;
+}
+
+#view-auth .auth-wrap{
+  background:transparent!important;
+}
+
+#view-auth .auth-side{
+  background:
+    radial-gradient(circle at 12% 12%,rgba(40,224,150,.10),transparent 32%),
+    linear-gradient(160deg,#d8f9ec,#d1f6e7 60%,#ffffff)!important;
+  border-right:1px solid #cce4db!important;
+  color:var(--auth-navy)!important;
+}
+#view-auth .auth-side .brand{color:var(--auth-navy)!important;}
+#view-auth .auth-side .brand .mark{
+  background:linear-gradient(145deg,#44e4a4,#28bd81)!important;
+  box-shadow:0 10px 24px rgba(40,224,150,.18)!important;
+}
+#view-auth .auth-side h2{color:var(--auth-navy)!important;}
+#view-auth .auth-side p{color:#628476!important;}
+#view-auth .auth-side .stats div span{color:#76978a!important;}
+#view-auth .auth-side .foot{color:#7d9d90!important;}
+
+#view-auth .auth-form-col{
+  background:transparent!important;
+  padding:42px 24px 56px!important;
+}
+#view-auth .auth-box{max-width:540px!important;}
+
+#view-auth .recovery-card{
+  width:100%!important;
+  background:#ffffff!important;
+  border:1px solid #cce0d8!important;
+  border-radius:26px!important;
+  box-shadow:0 28px 80px rgba(20,55,41,.12),0 5px 18px rgba(20,55,41,.05)!important;
+  overflow:hidden!important;
+}
+#view-auth .recovery-card:before{
+  display:block!important;
+  background:radial-gradient(circle at 88% 0%,rgba(40,224,150,.09),transparent 33%)!important;
+}
+#view-auth .recovery-head{
+  padding:34px 34px 22px!important;
+  border-bottom:1px solid #d7e4df!important;
+}
+#view-auth .recovery-logo{
+  width:66px!important;height:66px!important;
+  border-radius:18px!important;
+  background:#d6f2e7!important;
+  border:1px solid #c5e8da!important;
+  box-shadow:0 12px 28px rgba(40,224,150,.08)!important;
+}
+#view-auth .recovery-logo img{object-fit:contain!important;padding:5px!important;}
+#view-auth .recovery-card h1{
+  color:#1b392d!important;
+  font-size:31px!important;
+  letter-spacing:-1px!important;
+  font-weight:800!important;
+}
+#view-auth .recovery-card .lead{
+  color:#69897c!important;
+  font-size:13px!important;
+  line-height:1.65!important;
+}
+#view-auth .recovery-kicker{
+  color:#668e7e!important;
+  letter-spacing:.16em!important;
+}
+
+#view-auth .recovery-body{
+  padding:0 34px 31px!important;
+}
+#view-auth .recovery-nav{
+  padding:5px!important;
+  gap:0!important;
+  justify-content:stretch!important;
+  background:#d9e8e2!important;
+  border:1px solid #cddfd8!important;
+  border-radius:12px!important;
+  margin:0 0 25px!important;
+}
+#view-auth .recovery-nav a{
+  flex:1!important;
+  min-height:42px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border-radius:8px!important;
+  color:#708c81!important;
+  font-size:12.5px!important;
+  font-weight:800!important;
+}
+#view-auth .recovery-nav a.primary{
+  background:#ffffff!important;
+  color:#1c3c2f!important;
+  box-shadow:0 4px 14px rgba(24,59,45,.08)!important;
+}
+
+#view-auth .recovery-card .field label{
+  color:#315144!important;
+  font-size:11.5px!important;
+  font-weight:800!important;
+}
+#view-auth .recovery-card .input{
+  background:#ffffff!important;
+  color:#1b392d!important;
+  border:1px solid #c6ddd4!important;
+  border-radius:11px!important;
+  min-height:49px!important;
+}
+#view-auth .recovery-card .input::placeholder{color:#94ada3!important;}
+#view-auth .recovery-card .input:focus{
+  border-color:#65e5b2!important;
+  box-shadow:0 0 0 4px rgba(40,224,150,.09)!important;
+}
+#view-auth .recovery-card .btn-primary,
+#view-auth .recovery-card #forgot-submit,
+#view-auth .recovery-card #newpass-submit{
+  background:linear-gradient(135deg,#32e29c,#29be83)!important;
+  color:#ffffff!important;
+  border:0!important;
+  border-radius:11px!important;
+  min-height:49px!important;
+  box-shadow:0 12px 26px rgba(40,224,150,.18)!important;
+}
+#view-auth .recovery-card .btn-primary:hover,
+#view-auth .recovery-card #forgot-submit:hover,
+#view-auth .recovery-card #newpass-submit:hover{
+  background:linear-gradient(135deg,#28e096,#1db176)!important;
+  transform:translateY(-1px)!important;
+}
+
+/* Stronger-looking, cleaner human verification panel */
+#view-auth .security-check{
+  margin:22px 0 19px!important;
+  padding:16px!important;
+  border-radius:16px!important;
+  background:linear-gradient(145deg,#d8f9ec,#dbf0e8)!important;
+  border:1px solid #c5e0d5!important;
+  box-shadow:0 10px 26px rgba(28,68,52,.06)!important;
+}
+#view-auth .security-check:after{
+  left:16px!important;right:16px!important;
+  background:linear-gradient(90deg,transparent,#bfe5d6,transparent)!important;
+}
+#view-auth .robot-row{min-height:50px!important;gap:12px!important;}
+#view-auth .security-shield{
+  width:36px!important;height:36px!important;
+  border-radius:11px!important;
+  background:#cdf8e7!important;
+  color:#2cb67f!important;
+  border:1px solid #b8f4dc!important;
+}
+#view-auth .robot-check{
+  width:25px!important;height:25px!important;
+  border-radius:7px!important;
+  background:#ffffff!important;
+  border:1.5px solid #9eb9ae!important;
+}
+#view-auth .robot-check:focus-visible{
+  outline:3px solid rgba(40,224,150,.16)!important;
+  outline-offset:2px!important;
+}
+#view-auth .robot-check:checked{
+  background:#2cb67f!important;
+  border-color:#2cb67f!important;
+}
+#view-auth .robot-copy{
+  color:#254538!important;
+  font-size:13px!important;
+  font-weight:850!important;
+}
+#view-auth .robot-copy small{
+  color:#7d9b8f!important;
+  margin-top:2px!important;
+}
+#view-auth .security-state{
+  color:#7b9b8e!important;
+  letter-spacing:.11em!important;
+}
+#view-auth .robot-status{
+  color:#6e8e81!important;
+  border-top-color:#cfe5dc!important;
+}
+#view-auth .security-check.verifying{
+  border-color:#95d9bd!important;
+  box-shadow:0 12px 32px rgba(40,224,150,.10)!important;
+}
+#view-auth .security-check.verifying .robot-status{
+  color:#51816e!important;
+}
+#view-auth .security-check.verified{
+  background:#d6f9eb!important;
+  border-color:#9eeacc!important;
+}
+#view-auth .security-check.verified .security-shield{
+  background:#2cb67f!important;
+  color:#ffffff!important;
+  border-color:#2cb67f!important;
+}
+#view-auth .security-check.verified .security-state{
+  color:#2cb67f!important;
+}
+#view-auth .security-check.verified .robot-status{
+  color:#2a986c!important;
+  font-weight:800!important;
+}
+#view-auth .security-check.verified .robot-status:before{
+  background:#2cb67f!important;
+}
+#view-auth .password-strength{
+  height:6px!important;
+  background:#d5e6df!important;
+  margin-top:9px!important;
+}
+#view-auth .password-strength span{
+  background:linear-gradient(90deg,#67e6b3,#29be83)!important;
+}
+#view-auth .password-hint{color:#7d9b8f!important;}
+#view-auth .recovery-footer{color:#7e9c90!important;}
+
+@media(max-width:880px){
+  #view-landing .auth-card{grid-template-columns:1fr!important;max-width:650px!important;}
+  #view-landing .auth-side{display:none!important;}
+  #view-auth .auth-side{display:none!important;}
+}
+@media(max-width:560px){
+  #view-landing .auth-modal{padding:8px!important;}
+  #view-landing .auth-card{border-radius:24px!important;min-height:0!important;}
+  #view-landing .auth-main{padding:34px 20px 24px!important;}
+  #view-landing .auth-main h3{font-size:29px!important;}
+  #view-auth .auth-form-col{padding:16px 10px 35px!important;}
+  #view-auth .recovery-card{border-radius:22px!important;}
+  #view-auth .recovery-head{padding:28px 21px 20px!important;}
+  #view-auth .recovery-body{padding:0 21px 25px!important;}
+  #view-auth .recovery-card h1{font-size:26px!important;}
+  #view-auth .recovery-nav a{font-size:12px!important;}
+  #view-auth .security-check{padding:13px!important;}
+  #view-auth .security-state{display:none!important;}
+}

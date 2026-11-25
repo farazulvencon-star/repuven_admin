@@ -1,0 +1,6 @@
+.swipe-note{ position:relative; touch-action:pan-y; user-select:none; -webkit-user-select:none; cursor:grab; padding-right:40px !important; will-change:transform }
+.swipe-note:active{ cursor:grabbing }
+.swipe-x{ position:absolute; top:50%; right:8px; transform:translateY(-50%); width:26px; height:26px; border:0; border-radius:8px; background:transparent; color:inherit; opacity:.55; font-size:18px; line-height:1; cursor:pointer; display:grid; place-items:center }
+.swipe-x:hover{ opacity:1; background:rgba(255,255,255,.08) }
+#conn-error-banner .swipe-x{ position:static; transform:none; flex:none }
+#conn-error-banner.swipe-note{ padding-right:16px !important }

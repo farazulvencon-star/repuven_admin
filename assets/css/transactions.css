@@ -1,0 +1,41 @@
+/* Transactions tab. The admin panel's own colours and fonts. */
+.tx-member{ margin-bottom:18px; }
+.tx-filters{ display:flex; align-items:flex-end; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+.tx-filters .mb-search{ flex:1 1 260px; width:auto; }
+.tx-dates{ display:flex; gap:8px; }
+.tx-dates label{ display:block; }
+.tx-dates small{ display:block; margin-bottom:4px; font-size:11.5px; color:var(--muted); }
+.tx-dates .input{ width:150px; }
+.tx-quick{ display:flex; gap:4px; padding:4px; border-radius:12px; background:var(--surface); }
+.tx-quick button{ height:34px; padding:0 12px; border:0; border-radius:9px; background:none; color:var(--muted); font:inherit; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap; }
+.tx-quick button.active{ background:var(--surface-3); color:var(--ink); }
+.tx-sums b{ color:var(--ink); font-variant-numeric:tabular-nums; }
+.tx-sums b.rf-ok{ color:var(--ok); }
+.tx-sums b.tx-warn{ color:var(--warn); }
+.tx-list .mb-head, .tx-list .mb-row{ grid-template-columns:minmax(150px,.9fr) minmax(170px,1.1fr) minmax(120px,.7fr) minmax(200px,1.5fr) minmax(90px,.6fr) minmax(90px,.5fr); }
+.tx-when b{ display:block; font-size:13px; font-weight:600; color:var(--ink); }
+.tx-when span{ display:block; margin-top:2px; font-size:11.5px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.tx-details span{ display:block; font-size:13px; line-height:1.45; color:var(--text); overflow-wrap:anywhere; }
+.tx-details .tx-sub{ margin-top:3px; font-size:12px; color:var(--muted); }
+.tx-details .rf-link{ font-size:12px; }
+.tx-amt b{ font-size:14.5px; font-variant-numeric:tabular-nums; color:var(--muted); }
+.tx-amt b.is-in{ color:var(--ok); }
+.tx-amt b.is-out{ color:var(--ink); }
+.mb-row.is-bad .tx-amt b{ text-decoration:line-through; }
+.tx-st{ display:inline-block; padding:3px 9px; border-radius:99px; font-style:normal; font-size:12px; font-weight:600; background:var(--surface-3); color:var(--text); }
+.tx-st.is-ok{ color:var(--ok); }
+.tx-st.is-warn{ background:var(--warn-soft); color:var(--warn); }
+.tx-st.is-bad{ background:var(--danger-soft); color:var(--danger); }
+.tx-k-deposit, .tx-k-task, .tx-k-bonus{ color:var(--ok); }
+#tx-more[hidden], [data-tx-group][hidden]{ display:none !important; }
+@media (max-width:900px){
+  .tx-filters{ align-items:stretch; }
+  .tx-filters .mb-search{ flex-basis:100%; }
+  .tx-dates{ flex:1 1 100%; }
+  .tx-dates label{ flex:1; }
+  .tx-dates .input{ width:100%; }
+  .tx-quick{ flex:1 1 100%; overflow-x:auto; }
+  .tx-quick button{ flex:1; }
+  .tx-list .mb-row{ grid-template-columns:1fr 1fr; }
+  .tx-list .tx-details{ grid-column:1/-1; }
+}

@@ -1,0 +1,43 @@
+/* Team tab: supportive admin links. The admin panel's own colours and fonts. */
+.team-new{ display:grid; grid-template-columns:minmax(0,1fr); gap:16px; padding:18px; margin-bottom:16px; border-radius:12px; background:var(--surface); }
+.team-new .field{ margin:0; }
+.team-new .btn{ height:44px; justify-self:start; padding:0 22px; }
+.team-perms{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin:0; padding:0; border:0; min-width:0; }
+.team-perms legend{ margin:0 0 8px; padding:0; font-size:13px; font-weight:600; color:var(--text); }
+.team-perm{ display:flex; align-items:flex-start; gap:10px; padding:12px 14px; border-radius:10px; background:var(--surface-2); cursor:pointer; }
+.team-perm input{ flex:none; width:16px; height:16px; margin:2px 0 0; accent-color:var(--ink); }
+.team-perm b{ display:block; font-size:13.5px; font-weight:600; color:var(--ink); }
+.team-perm small{ display:block; margin-top:3px; font-size:12px; line-height:1.45; color:var(--muted); }
+.team-list{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.team-list > .empty-state{ grid-column:1/-1; }
+.team-card{ display:flex; flex-direction:column; gap:14px; min-width:0; padding:18px; border-radius:12px; background:var(--surface); }
+.team-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.team-name{ display:flex; align-items:center; flex-wrap:wrap; gap:8px 10px; min-width:0; }
+.team-name strong{ font-size:16px; color:var(--ink); overflow-wrap:anywhere; }
+.team-state{ padding:4px 8px; border-radius:4px; font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; background:var(--ok-soft); color:var(--ok); }
+.team-card.is-wait .team-state{ background:var(--warn-soft); color:var(--warn); }
+.team-card.is-off .team-state{ background:rgba(224,80,122,.14); color:#E7708F; }
+.team-access{ display:flex; align-items:center; gap:10px; flex:none; font-size:12.5px; color:var(--muted); }
+.team-person{ display:grid; grid-template-columns:40px minmax(0,1fr); gap:4px 12px; align-items:center; padding:12px 14px; border-radius:10px; background:var(--surface-2); }
+.team-av{ grid-row:span 2; display:grid; place-items:center; width:40px; height:40px; border-radius:50%; background:var(--surface-3); color:var(--ink); font-weight:700; }
+.team-who b{ display:block; font-size:14px; color:var(--ink); overflow-wrap:anywhere; }
+.team-who small{ display:block; margin-top:2px; font-size:12.5px; color:var(--muted); overflow-wrap:anywhere; }
+.team-stats{ display:flex; flex-wrap:wrap; gap:4px 14px; font-size:12.5px; color:var(--muted); }
+.team-stats b{ color:var(--ink); font-weight:600; }
+.team-perm-list{ display:grid; gap:2px; }
+.team-perm-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px 2px; font-size:14px; color:var(--text); }
+.team-perm-row + .team-perm-row{ border-top:1px solid var(--rule); }
+.team-card.is-off .team-perm-list{ opacity:.55; }
+.team-foot{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.team-foot small{ font-size:12.5px; color:var(--muted); }
+.team-del{ color:#E7708F !important; }
+@media (max-width:1200px){ .team-perms{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:900px){
+  .team-perms{ grid-template-columns:1fr; }
+  .team-list{ grid-template-columns:1fr; }
+  .team-new .btn{ width:100%; }
+}
+/* a supportive admin: no admin-only buttons */
+html.is-helper [data-as-del]{ display:none !important; }
+html.is-helper #bka-root{ display:none !important; }
+.atabs button[hidden]{ display:none !important; }

@@ -1,0 +1,320 @@
+/* ============================================================
+   Repuven — redesign pass v5
+   Icon system (replaces emoji), payment-method cards rebuilt in
+   brand green, and small consistency fixes. Loads last so it
+   wins the cascade over the older patch layers above.
+   ============================================================ */
+
+/* ---- inline icon glyphs (replace emoji characters) ---- */
+.icon-glyph{ width:1em; height:1em; display:inline-block; vertical-align:-0.14em; flex:none; }
+button .icon-glyph, a .icon-glyph{ vertical-align:-0.16em; }
+
+/* contexts that previously sized emoji via font-size now size the svg explicitly */
+.empty-state .icon{ font-size:0; display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px; color:var(--muted); opacity:.8; }
+.empty-state .icon .icon-glyph{ width:34px; height:34px; }
+.empty-state{ display:flex; flex-direction:column; align-items:center; }
+
+.eye-btn{ display:inline-flex; align-items:center; justify-content:center; }
+.eye-btn .icon-glyph{ width:18px; height:18px; }
+.menu-toggle{ display:inline-flex; align-items:center; justify-content:center; }
+.menu-toggle .icon-glyph{ width:20px; height:20px; }
+.modal-close, .how-guide-close, .auth-close{ display:inline-flex; align-items:center; justify-content:center; }
+.modal-close .icon-glyph, .how-guide-close .icon-glyph, .auth-close .icon-glyph{ width:15px; height:15px; }
+
+.chat-wa-check{ display:inline-flex; vertical-align:middle; color:var(--green); }
+.chat-wa-check .icon-glyph{ width:13px; height:13px; }
+html[data-theme="dark"] .chat-wa-check{ color:var(--green-light); }
+
+.campaign-ad-prize .icon-glyph{ width:15px; height:15px; margin-right:4px; vertical-align:-0.18em; }
+.campaign-ad-kicker .icon-glyph{ width:14px; height:14px; margin-right:5px; vertical-align:-0.15em; }
+.campaign-ad-cta .icon-glyph{ width:13px; height:13px; margin-right:5px; }
+.medal .icon-glyph{ width:26px; height:26px; }
+.medal{ display:inline-flex; }
+.medal-gold{ color:#D9A520; }
+.medal-silver{ color:#9AA7B0; }
+.medal-bronze{ color:#C47A3E; }
+
+.private-chat-head .icon-glyph{ width:14px; height:14px; margin-right:6px; vertical-align:-0.15em; color:var(--green-dark); }
+html[data-theme="dark"] .private-chat-head .icon-glyph{ color:var(--green-light); }
+
+.livechat-group-closed .icon-glyph{ width:30px; height:30px; margin-bottom:10px; opacity:.6; }
+
+/* icon used inline in short status / toast strings via innerHTML */
+.status-icon{ width:1em; height:1em; display:inline-block; vertical-align:-0.14em; margin-right:5px; flex:none; }
+.status-icon.ok{ color:var(--green-dark); }
+html[data-theme="dark"] .status-icon.ok{ color:var(--green-light); }
+.status-icon.warn{ color:var(--gold-dark); }
+@media(max-width:600px){ }
+
+/* ---- misc polish ---- */
+body{ background-image:radial-gradient(ellipse 1000px 560px at 12% -8%, var(--green-glow), transparent 62%); }
+::selection{ background:var(--green-soft); color:var(--green-dark); }
+a.btn, button.btn{ transition:transform .2s ease, box-shadow .2s ease, background-color .2s ease, border-color .2s ease, color .2s ease; }
+.btn-primary:hover{ transform:translateY(-1px); }
+.card, .step-card, .testimonial{ transition:box-shadow .25s ease, transform .25s ease, border-color .25s ease; }
+
+/* scrollbar, subtle */
+*{ scrollbar-width:thin; scrollbar-color:var(--line) transparent; }
+*::-webkit-scrollbar{ width:9px; height:9px; }
+*::-webkit-scrollbar-thumb{ background:var(--line); border-radius:99px; }
+
+/* ---- landing page: dark as the true default surface (major sections only —
+   this layer loads last, so it wins over the older light-only patches above) ---- */
+#view-landing[data-landing-theme="dark"]{ background:var(--bg); }
+#view-landing[data-landing-theme="dark"] .hero-wrap{ background:
+  radial-gradient(circle at 10% 10%, var(--green-glow), transparent 32%),
+  radial-gradient(circle at 92% 4%, color-mix(in srgb, var(--green) 16%, transparent), transparent 32%),
+  var(--bg); }
+#view-landing[data-landing-theme="dark"] .hero-wrap::before{ background:var(--green-glow); }
+#view-landing[data-landing-theme="dark"] .navbar{ background:color-mix(in srgb, var(--surface) 86%, transparent); border-color:var(--line); box-shadow:none; }
+#view-landing[data-landing-theme="dark"] .icon-btn{ background:var(--surface-2); color:var(--text); }
+#view-landing[data-landing-theme="dark"] .login-btn{ background:var(--surface); border-color:var(--line); color:var(--ink); }
+#view-landing[data-landing-theme="dark"] .trust-badge{ background:var(--surface); border-color:var(--line); color:var(--text); box-shadow:none; }
+#view-landing[data-landing-theme="dark"] .secondary-btn{ background:var(--surface); border-color:var(--line); color:var(--ink); }
+#view-landing[data-landing-theme="dark"] .hero-content h1,
+#view-landing[data-landing-theme="dark"] .hero-description,
+#view-landing[data-landing-theme="dark"] .section-header h2,
+#view-landing[data-landing-theme="dark"] .section-header p,
+#view-landing[data-landing-theme="dark"] .testimonial-intro h2,
+#view-landing[data-landing-theme="dark"] .testimonial-intro p,
+#view-landing[data-landing-theme="dark"] .feature-text h3,
+#view-landing[data-landing-theme="dark"] .feature-text>p,
+#view-landing[data-landing-theme="dark"] .step-card h3,
+#view-landing[data-landing-theme="dark"] .social-proof-stars strong{ color:var(--ink); }
+#view-landing[data-landing-theme="dark"] .hero-description,
+#view-landing[data-landing-theme="dark"] .section-header p,
+#view-landing[data-landing-theme="dark"] .testimonial-intro p,
+#view-landing[data-landing-theme="dark"] .feature-text>p,
+#view-landing[data-landing-theme="dark"] .step-card p,
+#view-landing[data-landing-theme="dark"] .benefit,
+#view-landing[data-landing-theme="dark"] .social-proof-text span,
+#view-landing[data-landing-theme="dark"] .footer-brand,
+#view-landing[data-landing-theme="dark"] .footer-links,
+#view-landing[data-landing-theme="dark"] .activity-info span,
+#view-landing[data-landing-theme="dark"] .testimonial-text,
+#view-landing[data-landing-theme="dark"] .nav-links a,
+#view-landing[data-landing-theme="dark"] .brands-title{ color:var(--text); }
+#view-landing[data-landing-theme="dark"] .visual-glow{ background:var(--green-glow); }
+#view-landing[data-landing-theme="dark"] .visual-glow-gold{ background:var(--gold-soft); }
+#view-landing[data-landing-theme="dark"] .floating-card{ background:var(--surface); border-color:var(--line); box-shadow:var(--shadow-md); }
+#view-landing[data-landing-theme="dark"] .approved-text,
+#view-landing[data-landing-theme="dark"] .app-welcome,
+#view-landing[data-landing-theme="dark"] .app-statusbar,
+#view-landing[data-landing-theme="dark"] .activity-row,
+#view-landing[data-landing-theme="dark"] .activity-label{ color:var(--text); }
+#view-landing[data-landing-theme="dark"] .app-welcome b{ color:var(--ink); }
+#view-landing[data-landing-theme="dark"] .balance-panel{ background:var(--surface-2); box-shadow:none; }
+#view-landing[data-landing-theme="dark"] .balance-main strong{ color:var(--ink); }
+#view-landing[data-landing-theme="dark"] .activity-row{ border-color:var(--line); }
+#view-landing[data-landing-theme="dark"] .bell{ background:var(--surface); box-shadow:none; }
+#view-landing[data-landing-theme="dark"] .phone-screen{ background:var(--surface-2) !important; }
+#view-landing[data-landing-theme="dark"] .brands-bar{ background:var(--surface); border-color:var(--line); box-shadow:none; }
+#view-landing[data-landing-theme="dark"] .category-pill{ background:var(--surface-2); border-color:var(--line); color:var(--text); }
+#view-landing[data-landing-theme="dark"] .feature-chip{ background:var(--surface); border-color:var(--line); }
+#view-landing[data-landing-theme="dark"] .step-card,
+#view-landing[data-landing-theme="dark"] .testimonial{ background:var(--surface); border-color:var(--line); box-shadow:none; }
+#view-landing[data-landing-theme="dark"] footer{ background:var(--bg); border-color:var(--line); }
+#view-landing[data-landing-theme="dark"] .dot-grid{ opacity:.14; }
+#view-landing[data-landing-theme="dark"] .auth-main{ background:linear-gradient(145deg,var(--surface),var(--surface-2)) !important; }
+#view-landing[data-landing-theme="dark"] .auth-main h3,
+#view-landing[data-landing-theme="dark"] .auth-mini-brand{ color:var(--ink) !important; }
+#view-landing[data-landing-theme="dark"] .auth-sub{ color:var(--text) !important; }
+#view-landing[data-landing-theme="dark"] .auth-field input{ background:var(--surface-2) !important; border-color:var(--line) !important; color:var(--ink) !important; }
+#view-landing[data-landing-theme="dark"] .auth-field label{ color:var(--muted) !important; }
+#view-landing[data-landing-theme="dark"] .auth-tabs{ background:var(--surface-2) !important; }
+#view-landing[data-landing-theme="dark"] .auth-tab{ color:var(--muted) !important; }
+#view-landing[data-landing-theme="dark"] .auth-tab.active{ background:var(--surface) !important; color:var(--ink) !important; }
+#view-landing[data-landing-theme="dark"] .social-btn{ background:var(--surface-2) !important; border-color:var(--line) !important; color:var(--ink) !important; }
+#view-landing[data-landing-theme="dark"] .auth-close{ background:var(--surface-2) !important; border-color:var(--line) !important; color:var(--text) !important; }
+
+/* ---- star rows: svg icons must lay out horizontally like the old text glyphs ---- */
+#view-landing .social-proof-stars,
+#view-landing .approved-stars,
+#view-landing .stars-row,
+.mini-stars{ display:inline-flex; align-items:center; gap:2px; letter-spacing:0; }
+#view-landing .social-proof-stars{ font-size:13px; color:var(--green); }
+#view-landing .social-proof-stars strong{ margin-left:7px; }
+#view-landing .approved-stars{ font-size:11px; color:var(--green); display:flex; }
+#view-landing .stars-row{ font-size:14px; color:var(--green); display:flex; }
+#view-landing .social-proof-stars .icon-glyph,
+#view-landing .approved-stars .icon-glyph,
+#view-landing .stars-row .icon-glyph{ display:block; width:1em; height:1em; }
+
+/* ---- dark landing: stronger overrides where older patches used !important ---- */
+#view-landing[data-landing-theme="dark"] .category-pill{
+  background:var(--surface-2) !important; border-color:var(--line) !important; color:var(--text) !important; }
+#view-landing[data-landing-theme="dark"] .category-pill:hover{
+  background:var(--green-soft) !important; border-color:var(--green) !important; color:var(--ink) !important; }
+#view-landing[data-landing-theme="dark"] .category-pill svg{ color:var(--green-light); }
+#view-landing[data-landing-theme="dark"] .feature-band,
+#view-landing[data-landing-theme="dark"] .how,
+#view-landing[data-landing-theme="dark"] .testimonials{ background:var(--bg) !important; }
+#view-landing[data-landing-theme="dark"] .feature-text,
+#view-landing[data-landing-theme="dark"] .feature-row{ background:transparent !important; box-shadow:none !important; }
+
+/* ---- login / register / recovery screens: dark (older patch is white-only and uses !important) ---- */
+html[data-theme="dark"] #view-auth{ --auth-navy:var(--ink);
+  background:radial-gradient(circle at 8% 10%,var(--green-glow),transparent 30%),
+             radial-gradient(circle at 94% 92%,color-mix(in srgb,var(--green) 10%,transparent),transparent 32%),var(--bg) !important; }
+html[data-theme="dark"] #view-auth .auth-side{
+  background:radial-gradient(circle at 12% 12%,var(--green-glow),transparent 38%),linear-gradient(160deg,var(--surface-2),var(--bg) 72%) !important;
+  border-right:1px solid var(--line) !important; }
+html[data-theme="dark"] #view-auth .auth-side .brand,
+html[data-theme="dark"] #view-auth .auth-side h2{ color:var(--ink) !important; }
+html[data-theme="dark"] #view-auth .auth-side p,
+html[data-theme="dark"] #view-auth .auth-side .stats div span,
+html[data-theme="dark"] #view-auth .auth-side .foot{ color:var(--muted) !important; }
+html[data-theme="dark"] #view-auth .auth-side .stats div{ color:var(--ink); }
+html[data-theme="dark"] #view-auth .recovery-card{ background:var(--surface) !important; border-color:var(--line) !important; box-shadow:var(--shadow-lg) !important; }
+html[data-theme="dark"] #view-auth .recovery-card:before{ background:radial-gradient(circle at 88% 0%,var(--green-glow),transparent 38%) !important; }
+html[data-theme="dark"] #view-auth .recovery-head{ border-bottom-color:var(--line) !important; }
+html[data-theme="dark"] #view-auth .recovery-logo{ background:var(--surface-2) !important; border-color:var(--line) !important; box-shadow:none !important; }
+html[data-theme="dark"] #view-auth .recovery-card h1{ color:var(--ink) !important; }
+html[data-theme="dark"] #view-auth .recovery-card .lead{ color:var(--text) !important; }
+html[data-theme="dark"] #view-auth .recovery-kicker{ color:var(--green-light) !important; }
+html[data-theme="dark"] #view-auth .recovery-nav{ background:var(--surface-2) !important; border-color:var(--line) !important; }
+html[data-theme="dark"] #view-auth .recovery-nav a{ color:var(--muted) !important; }
+html[data-theme="dark"] #view-auth .recovery-nav a.primary{ background:var(--surface) !important; color:var(--ink) !important; box-shadow:none !important; }
+html[data-theme="dark"] #view-auth .recovery-card .field label{ color:var(--text) !important; }
+html[data-theme="dark"] #view-auth .recovery-card .input{ background:var(--surface-2) !important; color:var(--ink) !important; border-color:var(--line) !important; }
+html[data-theme="dark"] #view-auth .recovery-card .input::placeholder{ color:var(--muted) !important; }
+html[data-theme="dark"] #view-auth .recovery-card .input:focus{ border-color:var(--green) !important; box-shadow:0 0 0 4px var(--green-glow) !important; }
+html[data-theme="dark"] #view-auth .recovery-card .btn-primary,
+html[data-theme="dark"] #view-auth .recovery-card #forgot-submit{ background:linear-gradient(135deg,var(--green-light),var(--green)) !important; color:#04170e !important; box-shadow:0 14px 30px var(--green-glow) !important; }
+html[data-theme="dark"] #view-auth .security-check{ background:var(--surface-2) !important; border-color:var(--line) !important; }
+html[data-theme="dark"] #view-auth .security-check:after{ background:linear-gradient(90deg,transparent,var(--line),transparent) !important; }
+html[data-theme="dark"] #view-auth .security-shield{ background:var(--green-soft) !important; color:var(--green-light) !important; border-color:transparent !important; }
+html[data-theme="dark"] #view-auth .robot-check{ background:var(--surface) !important; border-color:var(--muted) !important; }
+html[data-theme="dark"] #view-auth .robot-check:checked{ background:var(--green) !important; border-color:var(--green) !important; }
+html[data-theme="dark"] #view-auth .robot-copy{ color:var(--ink) !important; }
+html[data-theme="dark"] #view-auth .robot-copy small,
+html[data-theme="dark"] #view-auth .security-state,
+html[data-theme="dark"] #view-auth .robot-status,
+html[data-theme="dark"] #view-auth .password-hint,
+html[data-theme="dark"] #view-auth .recovery-footer{ color:var(--muted) !important; }
+html[data-theme="dark"] #view-auth .robot-status{ border-top-color:var(--line) !important; }
+html[data-theme="dark"] #view-auth .security-check.verified{ background:var(--green-soft) !important; border-color:var(--green) !important; }
+html[data-theme="dark"] #view-auth .security-check.verified .security-shield{ background:var(--green) !important; color:#04170e !important; }
+html[data-theme="dark"] #view-auth .security-check.verified .security-state,
+html[data-theme="dark"] #view-auth .security-check.verified .robot-status{ color:var(--green-light) !important; }
+html[data-theme="dark"] #view-auth .password-strength{ background:var(--surface-2) !important; }
+
+/* dark only: light surfaces and navy text hard-coded by older layers follow the theme */
+html[data-theme="dark"] .spinner{border-top-color:var(--line) !important}
+html[data-theme="dark"] .switch .track:before{background:var(--surface) !important}
+html[data-theme="dark"] .prize-status.active{color:var(--ink) !important}
+html[data-theme="dark"] .leaderboard-prize-banner{background:var(--surface-2) !important}
+html[data-theme="dark"] .leaderboard-prize-banner b{color:var(--ink) !important}
+html[data-theme="dark"] .livechat-pinned{background:var(--surface) !important}
+html[data-theme="dark"] .livechat-msg-tool:hover{color:var(--ink) !important}
+html[data-theme="dark"] .private-chat-box{background:var(--surface) !important}
+html[data-theme="dark"] #page-livechat .livechat-group-box{background:var(--surface) !important}
+html[data-theme="dark"] #page-support .support-chat-box{background:var(--surface) !important}
+html[data-theme="dark"] .livechat-group-name.admin{color:var(--ink) !important}
+html[data-theme="dark"] #pane-livechat .livechat-group-box{background:var(--surface) !important}
+html[data-theme="dark"] #pane-support .support-chat-box{background:var(--surface) !important}
+html[data-theme="dark"] #page-leaderboard .leaderboard-prize-banner{background:var(--surface-2) !important}
+html[data-theme="dark"] #page-leaderboard .campaign-ad-status{background:var(--surface) !important}
+html[data-theme="dark"] #page-leaderboard .campaign-ad-prize{background:var(--surface) !important}
+html[data-theme="dark"] #page-leaderboard .leaderboard-premium-card{background:var(--surface) !important}
+html[data-theme="dark"] #page-leaderboard .leaderboard-premium-card .leaderboard-head{background:var(--surface-2) !important;border-bottom:1px solid var(--line) !important}
+html[data-theme="dark"] #page-leaderboard .leaderboard-premium-card .leaderboard-head h2{color:var(--ink) !important}
+html[data-theme="dark"] #page-leaderboard .leaderboard-table th{background:var(--surface) !important;border-bottom:1px solid var(--line) !important}
+html[data-theme="dark"] #page-leaderboard .leaderboard-table td{background:var(--surface) !important;border-bottom:1px solid var(--line) !important;color:var(--ink) !important}
+html[data-theme="dark"] #page-leaderboard .leaderboard-table tbody tr:hover td{background:var(--surface) !important}
+html[data-theme="dark"] #page-leaderboard .leaderboard-user .mini{background:var(--surface) !important}
+html[data-theme="dark"] #page-leaderboard .leaderboard-user b{color:var(--ink) !important}
+html[data-theme="dark"] #page-leaderboard .leaderboard-earn{color:var(--ink) !important}
+html[data-theme="dark"] #page-leaderboard .leaderboard-note{background:var(--surface) !important;border-top:1px solid var(--line) !important}
+html[data-theme="dark"] .private-invite-inline{color:var(--ink) !important}
+html[data-theme="dark"] .package-details .package-buy{color:var(--ink) !important}
+html[data-theme="dark"] .home-work-showcase{background:var(--surface-2) !important}
+html[data-theme="dark"] .home-work-head h2{color:var(--ink) !important}
+html[data-theme="dark"] .home-work-link{color:var(--ink) !important}
+html[data-theme="dark"] .home-work-card{background:var(--surface) !important}
+html[data-theme="dark"] .home-work-image{background:var(--surface) !important}
+html[data-theme="dark"] .home-work-body h3{color:var(--ink) !important}
+
+/* no glow: coloured shadows, light blobs and floating motion from older layers are switched off */
+html[data-theme="dark"] .app-brand .mark-logo{box-shadow:0 0 0 1px rgba(10,99,214,.12) !important}
+html[data-theme="dark"] .nav-link.active{box-shadow:none !important}
+html[data-theme="dark"] .sidebar-user .av{box-shadow:none !important}
+html[data-theme="dark"] .btn-primary{box-shadow:none !important}
+html[data-theme="dark"] .btn-primary:hover:not(:disabled){box-shadow:none !important}
+html[data-theme="dark"] .input:focus{box-shadow:none !important}
+html[data-theme="dark"] #view-landing .auth-modal{background:rgba(2,12,9,.78) !important}
+html[data-theme="dark"] #view-landing .auth-side{background:linear-gradient(145deg,#0a2319 0%,#04130d 52%,#020906 100%) !important}
+html[data-theme="dark"] #view-landing .auth-brand-mark{box-shadow:none !important}
+html[data-theme="dark"] #view-landing .auth-kicker b{box-shadow:none !important}
+html[data-theme="dark"] #view-landing .auth-field input:focus{box-shadow:0 10px 22px rgba(17,80,52,.04) !important}
+html[data-theme="dark"] #view-landing .auth-submit{box-shadow:none !important}
+html[data-theme="dark"] #view-landing .auth-submit:hover{box-shadow:none !important}
+html[data-theme="dark"] #view-auth .auth-side{background:linear-gradient(160deg,var(--dark),#08201a 70%) !important}
+html[data-theme="dark"] #view-auth .auth-side{background:linear-gradient(160deg,#081b13,#0c291d 62%,#081b13) !important}
+html[data-theme="dark"] #view-auth .recovery-card:before{background:none !important}
+html[data-theme="dark"] .welcome-card:before{background:none !important}
+html[data-theme="dark"] .tier-card.active{box-shadow:none !important}
+html[data-theme="dark"] .package-card::before{background:none !important}
+html[data-theme="dark"] .package-card::after{background:none !important}
+html[data-theme="dark"] .package-card:hover{box-shadow:0 22px 46px rgba(0,0,0,.18) !important}
+html[data-theme="dark"] .package-card.active{box-shadow:0 0 0 1px var(--green), 0 22px 48px rgba(0,0,0,.18) !important}
+html[data-theme="dark"] .package-card.active .pc-icon{animation:none !important}
+html[data-theme="dark"] .package-details::before{box-shadow:none !important}
+html[data-theme="dark"] .package-details li::before{box-shadow:none !important}
+html[data-theme="dark"] .package-buy{box-shadow:none !important}
+html[data-theme="dark"] .package-card{background:linear-gradient(145deg,rgba(24,62,47,.98),rgba(11,38,27,.98)) !important}
+html[data-theme="dark"] .package-card::before{background:none !important}
+html[data-theme="dark"] .package-card::after{background:none !important}
+html[data-theme="dark"] .package-card:hover{box-shadow:0 28px 60px rgba(0,0,0,.28) !important}
+html[data-theme="dark"] .package-card.active{box-shadow:0 0 0 1px rgba(97,242,170,.55), 0 28px 60px rgba(0,0,0,.28) !important}
+html[data-theme="dark"] .package-card[data-tier="2"]{background:linear-gradient(145deg,#0a3c23,#16211d 54%,#0e3022) !important}
+html[data-theme="dark"] .package-card[data-tier="2"] .pc-icon{box-shadow:inset 0 1px 0 rgba(255,255,255,.5) !important}
+html[data-theme="dark"] .package-card[data-tier="2"].active{box-shadow:0 0 0 1px #68f3ae, 0 28px 60px rgba(0,0,0,.30) !important}
+html[data-theme="dark"] .package-particles::before,html[data-theme="dark"] .package-particles::after,html[data-theme="dark"] .gold-particles::before,html[data-theme="dark"] .gold-particles::after{filter:none !important}
+html[data-theme="dark"] .package-card.active .package-particles::before{animation:none !important}
+html[data-theme="dark"] .package-card.active .package-particles::after{animation:none !important}
+html[data-theme="dark"] .package-details{background:linear-gradient(145deg,rgba(25,58,45,.99),rgba(11,38,27,.99)) !important;box-shadow:0 25px 70px rgba(0,0,0,.25) !important}
+html[data-theme="dark"] .package-details::before{box-shadow:none !important}
+html[data-theme="dark"] .package-details.open{animation:none !important}
+html[data-theme="dark"] .package-details .pd-price{text-shadow:none !important}
+html[data-theme="dark"] .package-details li::before{box-shadow:none !important}
+html[data-theme="dark"] .package-buy{box-shadow:none !important}
+html[data-theme="dark"] .balance-card:before{background:none !important}
+html[data-theme="dark"] .mail-item.unread{box-shadow:none !important}
+html[data-theme="dark"] .mail-item.unread .mail-dot{box-shadow:none !important}
+html[data-theme="dark"] .livechat-room-logo{box-shadow:none !important}
+html[data-theme="dark"] .livechat-group-status.open i{box-shadow:none !important}
+html[data-theme="dark"] .leaderboard-live-badge span{box-shadow:none !important}
+html[data-theme="dark"] .livechat-state.open i{box-shadow:none !important}
+html[data-theme="dark"] .profile-avatar-preview{box-shadow:0 0 0 5px var(--surface) !important}
+html[data-theme="dark"] .support-agent-mark,html[data-theme="dark"] .support-agent-avatar{box-shadow:none !important}
+html[data-theme="dark"] .support-live-dot{box-shadow:none !important}
+html[data-theme="dark"] #page-leaderboard .leaderboard-prize-banner:before{box-shadow:none !important}
+html[data-theme="dark"] #page-leaderboard .campaign-ad-kicker:before{box-shadow:none !important}
+html[data-theme="dark"] .package-card[data-tier="2"]{box-shadow:0 22px 54px rgba(0,0,0,.28) !important}
+html[data-theme="dark"] .package-details::after{background:none !important}
+html[data-theme="dark"] .package-details.wave-in::after{animation:none !important}
+html[data-theme="dark"] .package-details .package-buy{box-shadow:none !important}
+html[data-theme="dark"] #view-auth .recovery-card:before{background:none !important}
+html[data-theme="dark"] #view-auth .recovery-card .input:focus{box-shadow:none !important}
+html[data-theme="dark"] #view-landing .auth-side{background:linear-gradient(155deg,#d6f9eb 0%,#cef8e7 54%,#d8f7ea 100%) !important}
+html[data-theme="dark"] #view-landing .auth-brand-mark{box-shadow:none !important}
+html[data-theme="dark"] #view-landing .auth-stat{box-shadow:none !important}
+html[data-theme="dark"] #view-landing .auth-close:hover{box-shadow:none !important}
+html[data-theme="dark"] #view-landing .auth-field input:focus{box-shadow:none !important}
+html[data-theme="dark"] #view-landing .auth-submit{box-shadow:none !important}
+html[data-theme="dark"] #view-landing .auth-submit:hover{box-shadow:none !important}
+html[data-theme="dark"] #view-landing .social-btn:hover{box-shadow:none !important}
+html[data-theme="dark"] #view-auth{background:#dbf0e8 !important}
+html[data-theme="dark"] #view-auth .auth-side{background:linear-gradient(160deg,#d8f9ec,#d1f6e7 60%,#ffffff) !important}
+html[data-theme="dark"] #view-auth .auth-side .brand .mark{box-shadow:none !important}
+html[data-theme="dark"] #view-auth .recovery-card:before{background:none !important}
+html[data-theme="dark"] #view-auth .recovery-logo{box-shadow:none !important}
+html[data-theme="dark"] #view-auth .recovery-card .input:focus{box-shadow:none !important}
+html[data-theme="dark"] #view-auth .recovery-card .btn-primary,html[data-theme="dark"] #view-auth .recovery-card #forgot-submit,html[data-theme="dark"] #view-auth .recovery-card #newpass-submit{box-shadow:none !important}
+html[data-theme="dark"] #view-auth .security-check.verifying{box-shadow:none !important}
+html[data-theme="dark"] #view-auth{background:var(--bg) !important}
+html[data-theme="dark"] #view-auth .auth-side{background:linear-gradient(160deg,var(--surface-2),var(--bg) 72%) !important}
+html[data-theme="dark"] #view-auth .recovery-card:before{background:none !important}
+html[data-theme="dark"] #view-auth .recovery-card .input:focus{box-shadow:none !important}
+html[data-theme="dark"] #view-auth .recovery-card .btn-primary,html[data-theme="dark"] #view-auth .recovery-card #forgot-submit{box-shadow:none !important}

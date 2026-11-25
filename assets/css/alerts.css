@@ -1,0 +1,41 @@
+/* Clear, easy-to-see error messages everywhere (wrong password, bad amount, failed save, ...).
+   Flat colours, no glow. */
+:root{ --err-fg:#FF8A8C; --err-bg:rgba(229,72,77,.12); --err-line:rgba(229,72,77,.5); }
+.field.error,
+.svx .field.error,
+#view-landing .auth-status.error,
+.form-alert{
+  position:relative; display:block; margin:4px 0 14px !important; padding:12px 14px 12px 42px !important;
+  border:1px solid var(--err-line) !important; border-radius:12px !important; background:var(--err-bg) !important;
+  color:var(--err-fg) !important; font-size:14px !important; font-weight:600 !important; line-height:1.45 !important;
+  text-align:left; overflow-wrap:anywhere;
+}
+.field.error::before,
+#view-landing .auth-status.error::before,
+.form-alert::before{
+  content:"!"; position:absolute; left:13px; top:11px; width:20px; height:20px; border-radius:50%;
+  background:#E5484D; color:#fff; font:800 13px/20px system-ui,sans-serif; text-align:center;
+}
+/* small error under one input (amount, number, reference) */
+.field .error, div.error{
+  display:block; margin-top:8px; padding:8px 11px 8px 32px; position:relative;
+  border-radius:10px; background:var(--err-bg); border:1px solid var(--err-line);
+  color:var(--err-fg) !important; font-size:13px !important; font-weight:600; line-height:1.4;
+}
+.field .error::before, div.error::before{
+  content:"!"; position:absolute; left:10px; top:8px; width:16px; height:16px; border-radius:50%;
+  background:#E5484D; color:#fff; font:800 11px/16px system-ui,sans-serif; text-align:center;
+}
+.field.error:empty, .field .error:empty, div.error:empty{ display:none !important; }
+/* the input that has the problem */
+.input.is-invalid, input.is-invalid, textarea.is-invalid, select.is-invalid{ border-color:#E5484D !important; box-shadow:0 0 0 1px #E5484D inset !important; }
+/* a short shake when a new message appears */
+@keyframes errShake{ 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(5px)} 60%{transform:translateX(-3px)} 80%{transform:translateX(2px)} }
+.err-shake{ animation:errShake .38s ease; }
+@media (prefers-reduced-motion:reduce){ .err-shake{ animation:none; } }
+/* error toasts: strong colour and readable size */
+.toast.err, .toast.error, .toast-error{ background:#E5484D !important; color:#fff !important; font-weight:600 !important; }
+/* wrong PIN / wrong code in the payment code box */
+.pc-msg.is-bad{ display:block; padding:10px 12px 10px 38px; position:relative; border-radius:10px; background:var(--err-bg); border:1px solid var(--err-line); color:var(--err-fg) !important; font-size:13.5px; font-weight:600; text-align:left; }
+.pc-msg.is-bad::before{ content:"!"; position:absolute; left:11px; top:10px; width:18px; height:18px; border-radius:50%; background:#E5484D; color:#fff; font:800 12px/18px system-ui,sans-serif; text-align:center; }
+.pc-msg.is-bad:empty{ display:none; }

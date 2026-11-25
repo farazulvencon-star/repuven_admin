@@ -1,0 +1,51 @@
+/* Tasks & Sectors: sector chips, the sector manager, and the dashboard support inbox */
+.sec-bar{ display:flex; flex-wrap:wrap; gap:8px; margin:4px 0 14px; }
+.sec-chip{ display:inline-flex; align-items:center; gap:7px; padding:8px 12px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--text); font:inherit; font-size:13px; font-weight:600; cursor:pointer; }
+.sec-chip span{ font-weight:500; color:var(--muted); font-variant-numeric:tabular-nums; }
+.sec-chip em{ font-style:normal; font-size:11px; font-weight:600; padding:2px 7px; border-radius:99px; background:var(--surface-2); color:var(--text); }
+.sec-chip.on{ background:var(--ink, #F4F3EE); border-color:var(--ink, #F4F3EE); color:var(--bg, #0C0D0C); }
+.sec-chip.on span{ color:inherit; opacity:.7; }
+.sec-chip.on em{ background:rgba(0,0,0,.12); color:inherit; }
+.sec-chip.is-off{ opacity:.6; border-style:dashed; }
+.sec-tag{ display:inline-block; padding:1px 7px; margin-right:4px; border-radius:6px; background:var(--surface-2); font-size:11px; font-weight:600; color:var(--text); }
+
+.sec-help{ margin:0 0 14px; font-size:13px; line-height:1.55; color:var(--muted); }
+.sec-row{ display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid var(--line); }
+.sec-row .grow{ flex:1; min-width:0; }
+.sec-row .ttl{ font-weight:650; display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.sec-row .sub2{ font-size:12px; color:var(--muted); margin-top:3px; }
+.sec-row.is-off .ttl{ opacity:.7; }
+.sec-ico{ width:34px; height:34px; flex:none; border-radius:10px; display:grid; place-items:center; background:var(--surface-2); color:var(--text); }
+.sec-row .list-actions{ display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-end; }
+.sec-form{ margin-top:18px; padding-top:16px; border-top:1px solid var(--line); }
+.sec-sec{ font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+.sec-check{ display:flex; align-items:center; gap:8px; font-size:13px; margin:2px 0 12px; }
+.sec-actions{ display:flex; gap:8px; justify-content:flex-end; }
+@media (max-width:600px){
+  .sec-row{ flex-wrap:wrap; }
+  .sec-row .list-actions{ width:100%; justify-content:flex-start; padding-left:46px; }
+}
+
+/* dashboard: support messages */
+.ov-sup{ margin-top:16px; padding:18px; border:1px solid var(--line); border-radius:16px; background:var(--surface); }
+.ov-sup-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+.ov-sup-head h3{ margin:0; font-size:16px; }
+.ov-sup-nums{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin-bottom:14px; }
+.ov-sup-nums div{ padding:12px; border-radius:12px; background:var(--surface-2); }
+.ov-sup-nums small{ display:block; font-size:11.5px; color:var(--muted); }
+.ov-sup-nums b{ display:block; margin-top:4px; font-size:22px; font-variant-numeric:tabular-nums; }
+.ov-sup-nums .is-hot b{ color:var(--danger, #E5484D); }
+.ov-sup-item{ padding:12px 0; border-top:1px solid var(--line); }
+.ov-sup-top{ display:flex; align-items:center; gap:10px; }
+.ov-sup-top .grow{ flex:1; min-width:0; }
+.ov-sup-name{ font-weight:650; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.ov-sup-name .nb{ font-size:11px; font-weight:700; padding:1px 7px; border-radius:99px; background:var(--danger, #E5484D); color:#fff; }
+.ov-sup-time{ font-size:12px; color:var(--muted); white-space:nowrap; }
+.ov-sup-msg{ margin:6px 0 0; font-size:13.5px; line-height:1.5; color:var(--text); white-space:pre-wrap; overflow-wrap:anywhere; }
+.ov-sup-form{ display:flex; gap:8px; margin-top:10px; align-items:flex-end; }
+.ov-sup-form textarea{ flex:1; min-height:42px; max-height:140px; resize:vertical; }
+.ov-sup-more{ display:flex; gap:8px; margin-top:6px; }
+.ov-sup-empty{ padding:14px 0 2px; font-size:13px; color:var(--muted); border-top:1px solid var(--line); }
+@media (max-width:600px){ .ov-sup-nums b{ font-size:18px; } }
+.sec-actions [hidden], .ov-sup [hidden]{ display:none !important; }
+.social-form{ max-width:560px; } .social-actions{ display:flex; justify-content:flex-end; }

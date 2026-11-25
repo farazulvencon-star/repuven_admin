@@ -1,0 +1,51 @@
+/* =====================================================================
+   Admin file: only the admin panel and its sign-in screen
+   ===================================================================== */
+/* the sidebar lists the admin sections, so the tab strip is not needed */
+.atabs{ display:none !important; }
+.apane{ padding-top:4px; }
+
+/* sign-in screen: email + password only (no sign-up, no social logins, no marketing) */
+#view-landing #authModal{ background:var(--sv-bg) !important; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+#view-landing #authModal .auth-card{ grid-template-columns:1fr !important; width:min(440px,100%) !important; min-height:0 !important; background:var(--sv-bg2) !important; box-shadow:none !important; }
+#view-landing #authModal .auth-main{ padding:36px 32px 30px !important; }
+#view-landing #authModal .admin-forgot{ text-align:right; margin-top:8px; }
+#view-landing #authModal .admin-forgot button{ background:none; border:0; padding:0; cursor:pointer; color:var(--sv-dim); font-size:12.5px; text-decoration:underline; text-underline-offset:3px; }
+#view-landing #authModal .admin-forgot button:hover{ color:var(--sv-ink); }
+#view-landing .brand-logo.admin-login-logo{ width:auto !important; height:auto !important; background:none !important; box-shadow:none !important; border:0 !important; border-radius:0 !important; overflow:visible !important; padding:0 !important; }
+#view-landing .admin-login-logo{ display:flex; align-items:center; gap:12px; margin:0 0 26px; }
+#view-landing .admin-login-logo img{ width:44px; height:44px; display:block; }
+#view-landing .admin-login-logo span{ font:700 20px/1 var(--sv-display); letter-spacing:-.03em; color:var(--sv-ink); }
+#view-landing .admin-login-logo em{ font-style:normal; font:500 11px/1 var(--sv-mono); letter-spacing:.14em; text-transform:uppercase; color:var(--sv-faint); margin-left:2px; }
+#view-landing #authModal #signinForm{ margin-top:22px; }
+
+/* admin brand in the sidebar */
+.app-brand .word small{ display:block; margin-top:3px; font:500 10.5px/1 var(--font-mono); letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+
+/* payments tab */
+.pay-admin-intro h3{ margin:0 0 6px; font-size:20px; letter-spacing:-.02em; color:var(--ink); }
+.pay-admin-intro p{ margin:0 0 18px; color:var(--text); max-width:62ch; }
+.pay-admin-list{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.pay-admin-card{ background:var(--surface); border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:12px; }
+.pay-admin-top{ display:flex; align-items:center; gap:14px; }
+.pay-admin-logo{ width:46px; height:46px; flex:none; border-radius:10px; overflow:hidden; display:grid; place-items:center; }
+.pay-admin-logo .pay-logo{ height:46px; border-radius:10px; }
+.pay-admin-name{ flex:1; display:flex; flex-direction:column; align-items:flex-start; gap:5px; }
+.pay-admin-name strong{ font-size:17px; color:var(--ink); }
+.pay-admin-state{ padding:4px 8px; border-radius:4px; font:500 11px/1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; background:var(--ok-soft); color:var(--ok); }
+.pay-admin-card.is-closed .pay-admin-state{ background:rgba(224,80,122,.14); color:#E7708F; }
+.pay-admin-card.is-closed .pay-admin-logo{ filter:grayscale(1); opacity:.5; }
+.pay-switch{ position:relative; width:48px; height:28px; flex:none; cursor:pointer; }
+.pay-switch input{ position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:pointer; z-index:1; }
+.pay-switch-track{ position:absolute; inset:0; border-radius:99px; background:var(--surface-3); transition:background .2s; }
+.pay-switch-track::after{ content:""; position:absolute; top:4px; left:4px; width:20px; height:20px; border-radius:50%; background:var(--muted); transition:transform .2s, background .2s; }
+.pay-switch input:checked + .pay-switch-track{ background:var(--ok); }
+.pay-switch input:checked + .pay-switch-track::after{ transform:translateX(20px); background:#fff; }
+.pay-switch input:focus-visible + .pay-switch-track{ outline:2px solid var(--ink); outline-offset:2px; }
+.pay-admin-label{ font:500 11px/1 var(--font-mono); letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+.pay-admin-row{ display:flex; gap:10px; }
+.pay-admin-row .input{ flex:1; min-width:0; font-size:16px; font-weight:600; letter-spacing:.03em; }
+.pay-admin-row .btn{ flex:none; }
+.pay-admin-updated{ margin:0; min-height:1em; font-size:12.5px; color:var(--muted); }
+.sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+@media (max-width:760px){ .pay-admin-list{ grid-template-columns:1fr; } }

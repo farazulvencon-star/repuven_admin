@@ -1,0 +1,32 @@
+/* VIP links tab */
+.vip-admin-intro h3{ margin:0 0 6px; font-size:20px; letter-spacing:-.02em; color:var(--ink); }
+.vip-admin-intro p{ margin:0 0 18px; max-width:70ch; line-height:1.6; color:var(--text); }
+.vip-admin-new{ display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) auto; gap:12px 14px; align-items:end; padding:18px; margin-bottom:16px; border-radius:12px; background:var(--surface); }
+.vip-admin-new .field{ margin:0; }
+.vip-admin-new .btn{ height:44px; }
+.vip-admin-list{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-bottom:28px; }
+.vip-admin-list > .empty-state{ grid-column:1/-1; }
+.vip-card{ display:flex; flex-direction:column; gap:12px; padding:18px; border-radius:12px; background:var(--surface); }
+.vip-card-top{ display:flex; align-items:center; gap:12px; }
+.vip-card-name{ flex:1; min-width:0; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.vip-card-name strong{ font-size:16px; color:var(--ink); overflow-wrap:anywhere; }
+.vip-state{ padding:4px 8px; border-radius:4px; font:500 11px/1 var(--font-mono); letter-spacing:.08em; text-transform:uppercase; background:var(--ok-soft); color:var(--ok); }
+.vip-card.is-off .vip-state{ background:rgba(224,80,122,.14); color:#E7708F; }
+.vip-card-url{ display:flex; align-items:center; gap:10px; padding:10px 10px 10px 14px; border-radius:10px; background:var(--surface-2); }
+.vip-card-url code{ flex:1; min-width:0; font-family:var(--font-mono); font-size:13px; color:var(--ink); overflow-wrap:anywhere; }
+.vip-card.is-off .vip-card-url code{ color:var(--muted); text-decoration:line-through; }
+.vip-card-meta{ display:flex; flex-wrap:wrap; gap:6px 16px; font-size:13px; color:var(--muted); }
+.vip-card-actions{ display:flex; flex-wrap:wrap; gap:8px; }
+.vip-admin-members-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 12px; scroll-margin-top:80px; }
+.vip-admin-members-head h3{ margin:0; font-size:17px; color:var(--ink); }
+.vip-members-tbl td{ white-space:nowrap; vertical-align:middle; }
+.vip-members-tbl td.vip-member-cell{ white-space:normal; min-width:180px; }
+.vip-members-tbl td.vip-member-cell small{ display:block; margin-top:3px; font-size:12px; color:var(--muted); overflow-wrap:anywhere; }
+#vip-members-all[hidden]{ display:none !important; }
+@media (max-width:900px){
+  .vip-admin-new{ grid-template-columns:1fr; }
+  .vip-admin-new .btn{ width:100%; }
+  .vip-admin-list{ grid-template-columns:1fr; }
+}
+/* phone: the hidden side menu must not cast a shadow over the page's left edge */
+@media (max-width:880px){ .app-sidebar:not(.open){ box-shadow:none !important; } }
