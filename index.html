@@ -314,7 +314,7 @@ html.rv-booting #rv-boot{display:grid;position:fixed;inset:0;z-index:2147483000;
         <button data-tab="submissions">Submissions</button>
         <button data-tab="verifications">Verifications</button>
         <button data-tab="withdrawals">Withdrawals</button>
-        <button data-tab="transactions">Transactions</button><button data-tab="deposits">Deposits</button><button data-tab="payments">Payments</button><button data-tab="social">Social Links</button><button data-tab="members">Members</button><button data-tab="referrals">Referrals</button><button data-tab="team">Team</button><button data-tab="vip">VIP Links</button><button data-tab="investors">Investors Bank</button><button data-tab="leadership">Leadership</button><button data-tab="announcements">Announcements</button>
+        <button data-tab="transactions">Transactions</button><button data-tab="deposits">Deposits</button><button data-tab="payments">Payments</button><button data-tab="social">Social Links</button><button data-tab="members">Members</button><button data-tab="referrals">Referrals</button><button data-tab="team">Team</button><button data-tab="vip">VIP Links</button><button data-tab="clients">Client Link</button><button data-tab="investors">Investors Bank</button><button data-tab="leadership">Leadership</button><button data-tab="announcements">Announcements</button>
         <button data-tab="mailbox">Mailbox</button>
         <button data-tab="support">Support Chat</button>
         <button data-tab="livechat">Live Chat</button>
@@ -541,6 +541,14 @@ html.rv-booting #rv-boot{display:grid;position:fixed;inset:0;z-index:2147483000;
         <button class="btn btn-secondary btn-sm" type="button" id="vip-members-all" hidden>Show all</button>
       </div>
       <div class="table-wrap" id="vip-members-wrap"><div class="skel" style="height:96px;"></div></div>
+    </div>
+    <div class="apane" id="pane-clients">
+      <div class="vip-admin-intro">
+        <h3>Client link</h3>
+        <p>One link for all your clients. Anyone who opens it sees, without an account, how many tasks are live, how many tasks members have finished, the last 30 days and the latest approved work. They cannot change anything, and member names, emails and payments stay private. Turn the link off any time, or make a new link: the old one stops working right away.</p>
+      </div>
+      <div class="field error" id="cl-admin-err" style="display:none;"></div>
+      <div id="cl-box"><div class="skel" style="height:96px;"></div></div>
     </div>
     <div class="apane" id="pane-investors">
       <section class="ib-hero">

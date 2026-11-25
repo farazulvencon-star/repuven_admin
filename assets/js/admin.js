@@ -214,6 +214,7 @@ const ADMIN_NAV = [
   ["referrals", "Referrals", '<circle cx="10" cy="4.5" r="2"/><circle cx="4.5" cy="15" r="2"/><circle cx="15.5" cy="15" r="2"/><path d="M10 6.5v3.5M10 10H4.5v3M10 10h5.5v3"/>'],
   ["team", "Team", '<circle cx="7.5" cy="7" r="2.6"/><path d="M2.8 16c0-2.6 2.1-4.4 4.7-4.4s4.7 1.8 4.7 4.4"/><circle cx="14" cy="7.8" r="2.1"/><path d="M13.6 11.7c2.2 0 3.9 1.6 3.9 3.9"/>'],
   ["vip", "VIP Links", '<path d="M10 2.8l2.2 4.5 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L2.8 8l5-.7L10 2.8Z"/>'],
+  ["clients", "Client Link", '<path d="M1.8 10S4.8 4.5 10 4.5s8.2 5.5 8.2 5.5-3 5.5-8.2 5.5S1.8 10 1.8 10Z"/><circle cx="10" cy="10" r="2.5"/>'],
   ["transactions", "Transactions", '<path d="M4 7h11"/><path d="m12 4 3 3-3 3"/><path d="M16 13H5"/><path d="m8 10-3 3 3 3"/>'],
   ["withdrawals", "Withdrawals", '<path d="M10 3v10"/><path d="M6 9.5 10 13l4-3.5"/><path d="M4 15.5h12"/>'],
   ["deposits", "Deposits", '<path d="M10 14V4"/><path d="M6 7.5 10 4l4 3.5"/><path d="M4 16.5h12"/>'],
@@ -733,7 +734,7 @@ Modules.admin = (function(){
   const sb = supabase;
 
   // ---------- tabs ----------
-  const tabs = ["overview","announcements","investors","leadership","members","referrals","team","vip","articles","products","usertasks","submissions","verifications","transactions","withdrawals","deposits","payments","social","mailbox","support","livechat","leaderboard"];
+  const tabs = ["overview","announcements","investors","leadership","members","referrals","team","vip","clients","articles","products","usertasks","submissions","verifications","transactions","withdrawals","deposits","payments","social","mailbox","support","livechat","leaderboard"];
   function renderTab(name){
     if(!canTab(name)) name = firstTab();
     tabs.forEach(t => {
@@ -3243,6 +3244,83 @@ Modules.admin = (function(){
     });
   }
 
+  // ---------- Client link: ONE read-only link for all clients (no account) ----------
+  function clUrl(token){ return vipSiteBase() + "#client/" + encodeURIComponent(token); }
+  function clError(msg){ const el = document.getElementById("cl-admin-err"); if(!el) return; el.textContent = msg || ""; el.style.display = msg ? "block" : "none"; }
+  function clCard(l){
+    const url = clUrl(l.token);
+    const on = !!l.is_active;
+    const views = Number(l.view_count || 0);
+    return `<div class="vip-card ${on ? "" : "is-off"}" style="max-width:760px;">
+      <div class="vip-card-top">
+        <div class="vip-card-name"><strong>Client link</strong><span class="vip-state">${on ? "On" : "Off"}</span></div>
+        <label class="pay-switch" title="Turn the link on or off">
+          <input type="checkbox" data-cl-toggle="${escapeHtml(l.id)}" ${on ? "checked" : ""}>
+          <span class="pay-switch-track" aria-hidden="true"></span>
+          <span class="sr-only">Link is on</span>
+        </label>
+      </div>
+      <div class="vip-card-url"><code>${escapeHtml(url)}</code><button class="btn btn-primary btn-sm" type="button" data-cl-copy="${escapeHtml(url)}">Copy link</button></div>
+      <div class="vip-card-meta"><span>Opened ${views} ${views === 1 ? "time" : "times"}</span><span>${l.last_viewed_at ? "Last opened " + fmtDate(l.last_viewed_at) : "Not opened yet"}</span><span>Made ${fmtDate(l.created_at)}</span></div>
+      <div class="vip-card-actions">
+        <a class="btn btn-secondary btn-sm" href="${escapeHtml(url)}" target="_blank" rel="noopener">Open page</a>
+        <button class="btn btn-ghost btn-sm" type="button" data-cl-new>Make a new link</button>
+      </div>
+    </div>`;
+  }
+  async function loadClientLinks(){
+    clError("");
+    const box = document.getElementById("cl-box");
+    const { data, error } = await sb.rpc("admin_get_client_links");
+    if(error){
+      box.innerHTML = "";
+      clError("Couldn't load the client link. Run the client_view_links.sql file in Supabase once, then refresh. (" + error.message + ")");
+      return;
+    }
+    const link = (Array.isArray(data) ? data : [])[0];
+    box.innerHTML = link ? clCard(link)
+      : `<div class="empty-state" style="max-width:760px;"><div class="icon"><svg class="icon-glyph" viewBox="0 0 24 24"><use href="#i-link"/></svg></div>
+           <p style="margin:0 0 14px;">There is no client link yet.</p>
+           <button class="btn btn-primary" type="button" data-cl-make><span class="btn-label">Make client link</span></button></div>`;
+  }
+  async function clMake(btn){
+    clError("");
+    if(btn){ btn.disabled = true; }
+    const { data, error } = await sb.rpc("admin_create_client_link", { p_label: null });
+    if(btn){ btn.disabled = false; }
+    if(error){ clError(error.message || "Couldn't make the link. Please try again."); return; }
+    if(data && data.token){ await vipCopy(clUrl(data.token)); toast("Client link made and copied. Send it to your clients.", "success"); }
+    else toast("Client link made.", "success");
+    loadClientLinks();
+  }
+  function wireClientsOnce(){
+    const pane = document.getElementById("pane-clients");
+    if(!pane || pane.dataset.wired) return;
+    pane.dataset.wired = "1";
+    pane.addEventListener("click", async e => {
+      const copyBtn = e.target.closest("[data-cl-copy]");
+      if(copyBtn){ vipCopy(copyBtn.dataset.clCopy, copyBtn); return; }
+      const makeBtn = e.target.closest("[data-cl-make]");
+      if(makeBtn){ clMake(makeBtn); return; }
+      const newBtn = e.target.closest("[data-cl-new]");
+      if(newBtn){
+        if(!confirm("Make a new client link? The old link stops working right away, so send the new one to your clients.")) return;
+        clMake(newBtn);
+      }
+    });
+    pane.addEventListener("change", async e => {
+      const t = e.target.closest("[data-cl-toggle]");
+      if(!t) return;
+      const on = t.checked;
+      t.disabled = true;
+      const { error } = await sb.rpc("admin_set_client_link_active", { p_link: t.dataset.clToggle, p_active: on });
+      t.disabled = false;
+      if(error){ t.checked = !on; toast(error.message || "Couldn't change the link.", "error"); return; }
+      toast(on ? "Link is on." : "Link is off. It stops working right away.", "success");
+      loadClientLinks();
+    });
+  }
+
   // ---------- Investor links: investor accounts and the monthly pool payout ----------
   function invUrl(token){ return vipSiteBase() + "?inv=" + encodeURIComponent(token); }
   function invError(msg){ const el = document.getElementById("inv-admin-err"); if(!el) return; el.textContent = msg || ""; el.style.display = msg ? "block" : "none"; }
@@ -3686,6 +3764,7 @@ Modules.admin = (function(){
     social: ()=>{loadSocialAdmin();},
     transactions: ()=>{wireTxOnce();loadTx(true);},
     vip: ()=>{wireVipOnce();loadVipLinks();},
+    clients: ()=>{wireClientsOnce();loadClientLinks();},
     team: ()=>{wireTeamOnce();loadTeam();},
     members: ()=>{wireMembersOnce();loadMembers(true);},
     referrals: ()=>{wireRefsOnce();loadRefs(true);},
